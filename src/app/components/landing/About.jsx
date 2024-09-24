@@ -17,14 +17,14 @@ const About = () => {
           <ProfileCard
             name="Melany Serquen"
             title="CEO y Founder"
-            description="7+ años de experiencia en gestión de proyectos y liderazgo de equipos."
+            description="+10 años de experiencia liderando equipos de desarrollo de software en grandes empresas."
             profileImage={melany}
             linkedInLink="https://linkedin.com/in/marialopez"
           />
           <ProfileCard
             name="Iara Roldan"
             title="CEO y Founder"
-            description="7+ años de experiencia en gestión de proyectos y liderazgo de equipos."
+            description="+10 años de experiencia liderando equipos de desarrollo de software en startups."
             profileImage={iara}
             linkedInLink="https://linkedin.com/in/juandoe"
           />
@@ -37,8 +37,8 @@ const About = () => {
           />
           <ProfileCard
             name="Juan Doe"
-            title="CEO y Founder"
-            description="10+ años de experiencia en marketing digital y estrategias SEO."
+            title="Principal Engineer"
+            description="10+ años de experiencia en desarrollo de software."
             profileImage={empleado2}
             linkedInLink="https://linkedin.com/in/juandoe"
           />
