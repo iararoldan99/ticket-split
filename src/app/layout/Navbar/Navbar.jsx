@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
 import logo from '../../assets/img/Icon.svg';
-
+// navbar para cuando no estamos logueadas
 const Navbar = () => {
   return (
     <nav className="bg-white py-4">
@@ -18,8 +18,8 @@ const Navbar = () => {
             Iniciar sesión
           </Link>
           <Link
-            to="/register"
-            className="border border-black text-black px-4 py-2 rounded-md hover:bg-gray-100 transition"
+            to="/registro" 
+            className="border border-black text-black px-4 py-2 rounded-md hover:bg-primary transition"
           >
             Registrarse
           </Link>

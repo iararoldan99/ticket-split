@@ -1,16 +1,17 @@
 import React from 'react';
 import NavbarSimple from '../../layout/Navbar/NavbarSimple';
-import LoginForm from '../../components/login/LoginForm';
+import HeroRegistro from '../../components/registro/HeroRegistro';
 import Footer from '../../layout/Footer/Footer';
 
-const Login = () => {
+const Registro = () => {
+
   return (
     <div>
       <NavbarSimple />
-      <LoginForm />
+      <HeroRegistro />
       <Footer />
     </div>
   );
 };
 
-export default Login;
+export default Registro;
