@@ -24,7 +24,6 @@ const Footer = () => {
               <li>Equipo</li>
               <li>Historia</li>
               <li>Oficinas</li>
-              <li>API</li>
               <li>Privacidad</li>
               <li>Términos y condiciones</li>
             </ul>

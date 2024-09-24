@@ -1,5 +1,6 @@
 import React from 'react';
 import heroImage from '../../assets/img/Illustration.svg';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -9,8 +10,10 @@ const Hero = () => {
         <p className="text-lg text-gray-600 mb-6">
           Registrá, gestioná y calculá el dinero que gastás con otras personas: simple, rápido y en un solo lugar.
         </p>
-        <button className="bg-black text-white py-3 px-6 rounded-lg">Comencemos</button>
-      </div>
+        <Link to="/registro">
+          <button className="bg-black text-white py-3 px-6 rounded-lg">Comencemos</button>
+        </Link>      
+        </div>
       <div className="flex-shrink-0">
         <img src={heroImage} alt="Fiesta" className="w-full max-w-lg lg:max-w-2xl" />
       </div>
