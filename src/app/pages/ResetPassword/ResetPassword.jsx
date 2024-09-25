@@ -1,8 +1,7 @@
-import React from 'react';
-import NavbarSimple from '../../layout/Navbar/NavbarSimple';
-import HeroRegistro from '../../components/registro/HeroRegistro';
-import Footer from '../../layout/Footer/Footer';
 import { motion } from 'framer-motion';
+import ResetPasswordForm from '../../components/forgotPass/ResetPasswordForm';
+import NavbarSimple from '../../layout/Navbar/NavbarSimple';
+import Footer from '../../layout/Footer/Footer';
 
 const pageTransition = {
     initial: { opacity: 0, y: 50 },
@@ -11,8 +10,7 @@ const pageTransition = {
     transition: { duration: 0.5 },
 };
 
-const Registro = () => {
-
+const ResetPassword = () => {
     return (
         <>
             <motion.div
@@ -22,14 +20,14 @@ const Registro = () => {
                 variants={pageTransition}
                 transition={pageTransition.transition}
             >
-            <div >
-                <NavbarSimple />
-                <HeroRegistro />
-                <Footer />
-            </div>
-        </motion.div >
-    </>
-  );
+                <div>
+                    <NavbarSimple />
+                    <ResetPasswordForm />
+                    <Footer />
+                </div>
+            </motion.div>
+        </>
+    );
 };
 
-export default Registro;
+export default ResetPassword;

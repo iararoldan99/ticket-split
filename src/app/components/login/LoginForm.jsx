@@ -3,6 +3,7 @@ import mobileAppImage from '../../assets/img/Group 1948759423 (1).svg';
 import { FaGoogle } from 'react-icons/fa';
 import playStoreImg from '../../assets/img/App Store.svg';
 import appImg from '../../assets/img/Google Play.svg';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   return (
@@ -12,7 +13,7 @@ const LoginForm = () => {
         <img src={mobileAppImage} alt="Mobile App" className="w-2/3 md:w-full" />
       </div>
 
-      <div className="md:w-1/2 bg-white p-8 rounded-lg shadow-lg max-w-md">
+      <div className="md:w-1/2 bg-white p-8 rounded-lg shadow-lg max-w-md"> 
         <h1 className="text-2xl font-semibold text-center mb-6">Iniciar sesión</h1>
         <form className="space-y-4">
           <div>
@@ -32,7 +33,7 @@ const LoginForm = () => {
             />
           </div>
           <div className="flex justify-end">
-            <a href="#" className="text-primary text-sm">¿Olvidaste tu contraseña?</a>
+          <Link to="/forgotPassword" className="text-primary text-sm">¿Olvidaste tu contraseña?</Link>
           </div>
           <button className="w-full bg-gray-400 text-white p-3 rounded-lg font-semibold hover:bg-gray-500">
             Iniciar sesión
@@ -50,7 +51,7 @@ const LoginForm = () => {
         </button>
 
         <div className="text-center mt-4">
-          <p className="text-sm">¿No tenés una cuenta? <a href="#" className="text-primary">Regístrate</a></p>
+          <p className="text-sm">¿No tenés una cuenta? <Link to="/registro" className="text-primary">Regístrate</Link></p>
         </div>
         <div className="flex justify-center mt-10 space-x-4">
           <img src={playStoreImg} alt="App Store" className="h-12" />

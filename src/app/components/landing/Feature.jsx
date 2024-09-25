@@ -8,7 +8,7 @@ const Features = () => {
         <div className="flex space-x-4 justify-center md:w-1/2">
           <img src={mobileAppImage} alt="Mobile App" className="w-3/4 md:w-full" />
         </div>
-        <div className="md:w-1/2 mt-8 md:mt-0 text-center md:text-left">
+        <div className="md:w-1/2 mt-8 md:mt-0 text-center md:text-left mb-8">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Las finanzas de tu grupo de amigos, resueltas para vos.</h2>
           <p className="text-lg text-black-600">
             Creá y gestioná proyectos de división de gastos, calculá y controlá el dinero que gastás.
