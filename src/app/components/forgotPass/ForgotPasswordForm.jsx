@@ -3,13 +3,13 @@ import { FaGoogle } from 'react-icons/fa';
 import playStoreImg from '../../assets/img/App Store.svg';
 import appImg from '../../assets/img/Google Play.svg';
 import forgotPasswordImage from '../../assets/img/Mockups.svg';
-import { Link, useNavigate } from 'react-router-dom';  // Importamos useNavigate
+import { Link, useNavigate } from 'react-router-dom';  
 import Modal from './Modal';  
 
 const ForgotPasswordForm = () => {
   const [email, setEmail] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();  // Inicializamos useNavigate
+  const navigate = useNavigate();  
 
   const handleSubmit = (event) => {
     event.preventDefault();
