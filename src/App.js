@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import AuthProvider from './app/context/AuthContext'; 
 import Landing from './app/pages/Landing/Landing';
 import Login from './app/pages/Login/Login';
 import ForgotPassword from './app/pages/ForgotPassword/ForgotPassword';
@@ -17,7 +18,7 @@ function AnimatedRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />  
+        <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>
     </AnimatePresence>
   );
@@ -25,9 +26,11 @@ function AnimatedRoutes() {
 
 function App() {
   return (
-    <Router>
-      <AnimatedRoutes />
-    </Router>
+    <AuthProvider>  
+      <Router>
+        <AnimatedRoutes />
+      </Router>
+    </AuthProvider>
   );
 }
 

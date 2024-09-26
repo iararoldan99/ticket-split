@@ -3,18 +3,18 @@ import { FaGoogle } from 'react-icons/fa';
 import playStoreImg from '../../assets/img/App Store.svg';
 import appImg from '../../assets/img/Google Play.svg';
 import forgotPasswordImage from '../../assets/img/Mockups.svg';
-import { Link, useNavigate } from 'react-router-dom';  // Importamos useNavigate
-import Modal from './Modal';  
+import { Link, useNavigate } from 'react-router-dom';
+import Modal from './Modal';
 
 const ForgotPasswordForm = () => {
   const [email, setEmail] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();  // Inicializamos useNavigate
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validMail) {
-      setShowModal(true);  
+      setShowModal(true);
     }
   };
 
@@ -22,7 +22,7 @@ const ForgotPasswordForm = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
-    navigate('/reset-password');  
+    navigate('/reset-password');
   };
 
   return (
@@ -30,7 +30,7 @@ const ForgotPasswordForm = () => {
       <div className="bg-gray-50 min-h-screen flex flex-col justify-center items-center">
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-6 py-12">
           <div className="md:w-1/2 flex justify-center mb-8 md:mb-0">
-            <img src={forgotPasswordImage} alt="Olvidé mi contraseña" className="w-2/3 md:w-full max-w-sm" />
+            <img src={forgotPasswordImage} alt="Olvidé mi contraseña" className="w-full max-w-lg" />
           </div>
 
           <div className="md:w-1/2 bg-white p-10 rounded-lg shadow-lg max-w-lg space-y-6">
@@ -50,10 +50,9 @@ const ForgotPasswordForm = () => {
 
               <button
                 type="submit"
-                disabled={!validMail}  
-                className={`w-full p-3 rounded-lg font-semibold transition-colors ${
-                  validMail ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-gray-400 text-white'
-                }`}
+                disabled={!validMail}
+                className={`w-full p-3 rounded-lg font-semibold transition-colors ${validMail ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-gray-400 text-white'
+                  }`}
               >
                 Siguiente
               </button>
@@ -84,11 +83,11 @@ const ForgotPasswordForm = () => {
       </div>
 
       {showModal && (
-        <Modal onClose={handleCloseModal}> 
+        <Modal onClose={handleCloseModal}>
           <h2 className="text-2xl font-bold text-center mb-4">Correo enviado</h2>
           <p className="text-center mb-6">Hemos enviado un enlace para restablecer tu contraseña a tu correo electrónico.</p>
           <button
-            onClick={handleCloseModal}  
+            onClick={handleCloseModal}
             className="bg-green-500 bg-primary text-white font-semibold py-2 px-6 rounded-lg w-full"
           >
             Aceptar

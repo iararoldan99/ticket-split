@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { AuthContext } from '../../context/AuthContext'; 
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
-const FormRegistro = ({ onSubmit }) => {
+const FormRegistro = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
@@ -14,6 +16,8 @@ const FormRegistro = ({ onSubmit }) => {
     number: false,
     specialChar: false,
   });
+  const { register } = useContext(AuthContext);  
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -57,8 +61,14 @@ const FormRegistro = ({ onSubmit }) => {
     setIsFormValid(emailIsValid && usernameIsValid && passwordIsValid);
   }, [email, username, passwordCriteria]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    register(email, username, password); 
+    navigate('/dashboard');  
+  };
+
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <label className="block mb-2">Email</label>
       <input
         type="email"
@@ -103,18 +113,6 @@ const FormRegistro = ({ onSubmit }) => {
         <p className={passwordCriteria.specialChar ? "text-green-500" : "text-gray-600"}>● Un carácter especial</p>
       </div>
 
-      <div className="mt-4">
-        <input type="checkbox" id="newsletter" className="mr-2" />
-        <label htmlFor="newsletter">
-          Quiero recibir mails sobre el producto, servicios, novedades y newsletter.
-        </label>
-      </div>
-
-      <p className="text-sm mt-4">
-        Al registrarte aceptás los{' '}
-        <a href="#" className="text-primary">Términos y condiciones</a>.
-      </p>
-
       <button
         type="submit"
         className={`py-3 px-6 rounded-lg w-full font-bold text-lg mt-4 ${
@@ -124,11 +122,6 @@ const FormRegistro = ({ onSubmit }) => {
       >
         Crear cuenta
       </button>
-
-      <p className="text-center text-sm mt-4">
-        ¿Ya estás registrado?{' '}
-        <a href="/login" className="text-primary hover:underline font-bold">Iniciar sesión</a>
-      </p>
     </form>
   );
 };
