@@ -44,11 +44,20 @@ const UltimosMovimientos = () => {
     navigate('/projectCreate');
   };
 
+  const handleVerTodo = () => {
+    navigate('/viewProjects'); 
+  };
+
   return (
     <div className="w-full py-6 bg-white flex flex-col items-center flex-grow rounded-t-3xl relative pb-16">
       <div className="flex justify-between items-center mb-4 w-11/12 md:w-2/3 mx-auto pt-0"> 
         <h2 className="text-xl font-semibold">Últimos Movimientos</h2>
-        <button className="text-black hover:underline">Ver Todo</button>
+        <button 
+          className="text-black hover:underline"
+          onClick={handleVerTodo} 
+        >
+          Ver Todo
+        </button>
       </div>
 
       <div className="relative w-11/12 md:w-2/3 mx-auto h-[14rem] md:h-[18rem] overflow-y-auto custom-scrollbar">

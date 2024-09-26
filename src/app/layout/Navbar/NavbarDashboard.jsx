@@ -30,36 +30,45 @@ const NavbarDashboard = () => {
           </button>
         </div>
 
-        <div className={`flex-col md:flex-row items-center space-x-6 hidden md:flex ${isMenuOpen ? 'block' : 'hidden'} md:flex`}>
+        {/* Menú en pantallas grandes */}
+        <div className={`flex-col md:flex-row items-center space-x-6 hidden md:flex`}>
           <Link to="/dashboard" className="text-gray-500 hover:text-black font-bold">Inicio</Link> 
           <Link to="/calcular-gastos" className="text-gray-500 hover:text-black">Calcular gastos</Link>
-          <Link to="/proyectos" className="text-gray-500 hover:text-black">Proyectos</Link>
+          
+          {/* Enlace a Ver Proyectos */}
+          <Link to="/viewProjects" className="text-gray-500 hover:text-black">Proyectos</Link>
+          
           <Link to="/historial" className="text-gray-500 hover:text-black">Historial</Link>
 
-          <div className="relative">
+          <div className="relative"> 
             <button onClick={toggleDropdown} className="flex items-center space-x-2">
               <img src={userIcon} alt="User Icon" className="h-8 w-8 rounded-full" />
               <span>Agus</span>
               <FaChevronDown />
             </button>
 
+            {/* Dropdown en pantallas grandes */}
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2">
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50"> 
                 <Link to="/mi-cuenta" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi cuenta</Link>
                 <Link to="/notificaciones" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Notificaciones</Link>
                 <Link to="/configuracion" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Configuración</Link>
-                <Link to="/logout" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cerrar sesión</Link>
+                <Link to="/logout" className="block px-4 py-2 text-red-500 hover:bg-gray-100">Cerrar sesión</Link> {/* Cambia el color del texto */}
               </div>
             )}
           </div>
         </div>
       </div>
 
+      {/* Menú en pantallas móviles */}
       {isMenuOpen && (
         <div className="md:hidden bg-white py-2">
           <Link to="/dashboard" className="block px-4 py-2 text-gray-500 hover:text-black font-bold">Inicio</Link> 
           <Link to="/calcular-gastos" className="block px-4 py-2 text-gray-500 hover:text-black">Calcular gastos</Link>
-          <Link to="/proyectos" className="block px-4 py-2 text-gray-500 hover:text-black">Proyectos</Link>
+          
+          {/* Enlace a Ver Proyectos */}
+          <Link to="/viewProjects" className="block px-4 py-2 text-gray-500 hover:text-black">Proyectos</Link>
+          
           <Link to="/historial" className="block px-4 py-2 text-gray-500 hover:text-black">Historial</Link>
         </div>
       )}

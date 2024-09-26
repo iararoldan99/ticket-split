@@ -9,6 +9,9 @@ import ResetPassword from './app/pages/ResetPassword/ResetPassword';
 import Registro from './app/pages/Registro/Registro';
 import Dashboard from './app/pages/Dashboard/Dashboard'; 
 import ProjectCreate from './app/pages/ProjectCreate/ProjectCreate'; 
+import ViewProjects from './app/pages/ViewProjects/ViewProjects'; 
+import ProjectDetails from './app/pages/ProjectDetails/ProjectDetails'; 
+import MyAccount from './app/pages/MyAccount/MyAccount'; 
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -22,7 +25,10 @@ function AnimatedRoutes() {
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/dashboard" element={<Dashboard />} /> 
-        <Route path="/projectCreate" element={<ProjectCreate />} /> 
+        <Route path="/projectCreate" element={<ProjectCreate />} />
+        <Route path="/viewProjects" element={<ViewProjects />} /> 
+        <Route path="/projects/:projectName" element={<ProjectDetails />} /> 
+        <Route path="/my-account" element={<MyAccount />} />
       </Routes>
     </AnimatePresence>
   );
