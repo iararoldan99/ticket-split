@@ -1,6 +1,6 @@
 import React from 'react';
+import ForgotPasswordForm from '../../components/forgotPass/ForgotPasswordForm';
 import NavbarSimple from '../../layout/Navbar/NavbarSimple';
-import HeroRegistro from '../../components/registro/HeroRegistro';
 import Footer from '../../layout/Footer/Footer';
 import { motion } from 'framer-motion';
 
@@ -11,8 +11,7 @@ const pageTransition = {
     transition: { duration: 0.5 },
 };
 
-const Registro = () => {
-
+const ForgotPassword = () => {
     return (
         <>
             <motion.div
@@ -22,14 +21,14 @@ const Registro = () => {
                 variants={pageTransition}
                 transition={pageTransition.transition}
             >
-            <div >
-                <NavbarSimple />
-                <HeroRegistro />
-                <Footer />
-            </div>
-        </motion.div >
-    </>
-  );
+                <div>
+                    <NavbarSimple />
+                    <ForgotPasswordForm />
+                    <Footer />
+                </div>
+            </motion.div>
+        </>
+    );
 };
 
-export default Registro;
+export default ForgotPassword;

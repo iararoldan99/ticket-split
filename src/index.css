@@ -13,5 +13,5 @@
   
   .wave-animation {
     width: 100%;
-    animation: wave-motion 4s ease-in-out infinite; 
+    animation: wave-motion 3s ease-in-out infinite; 
   }
