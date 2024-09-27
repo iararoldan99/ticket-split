@@ -1,48 +1,40 @@
-import React, { createContext, useState, useEffect } from 'react';
-
+import React, { createContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, register, logout } from '../redux/authSlice';
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
-
-  const login = (email, password) => {
+  const loginUser = (email, password) => {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const validUser = users.find(user => user.email === email && user.password === password);
 
     if (validUser) {
-      setUser(validUser);
-      localStorage.setItem('user', JSON.stringify(validUser));
+      dispatch(login(validUser));
       return true;
     } else {
       return false;
     }
   };
 
-  const register = (email, username, password) => {
+  const registerUser = (email, username, password) => {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const newUser = { email, username, password };
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
-    setUser(newUser);
-    localStorage.setItem('user', JSON.stringify(newUser));
+    dispatch(register(newUser));  
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('user');
+  const logoutUser = () => {
+    dispatch(logout());  
   };
 
   const forgotPassword = (email) => {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const user = users.find(user => user.email === email);
-    return user ? true : false; 
+    return user ? true : false;
   };
 
   const resetPassword = (email, newPassword) => {
@@ -59,7 +51,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, forgotPassword, resetPassword }}>
+    <AuthContext.Provider value={{ user, loginUser, registerUser, logoutUser, forgotPassword, resetPassword }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,7 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { AuthContext } from '../../context/AuthContext'; 
+import React, { useState, useEffect } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { register } from '../../redux/authSlice';
 
 const FormRegistro = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -16,7 +17,8 @@ const FormRegistro = () => {
     number: false,
     specialChar: false,
   });
-  const { register } = useContext(AuthContext);  
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
@@ -63,8 +65,8 @@ const FormRegistro = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    register(email, username, password); 
-    navigate('/dashboard');  
+    dispatch(register({ email, username, password }));
+    navigate('/dashboard');
   };
 
   return (

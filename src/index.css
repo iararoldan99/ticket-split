@@ -15,3 +15,45 @@
     width: 100%;
     animation: wave-motion 3s ease-in-out infinite; 
   }
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #b0b0b0;
+    border-radius: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #888;
+  }
+
+  .fixed-sidebar {
+    position: relative;
+    z-index: 10; 
+    padding-left: 1.5rem; 
+    padding-right: 1.5rem;
+  }
+  
+
+  .toggle-switch {
+    @apply w-12 h-6 bg-gray-300 rounded-full relative transition duration-300 ease-in-out cursor-pointer;
+  }
+
+  .toggle-switch:before {
+    content: "";
+    @apply w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition duration-300 ease-in-out;
+  }
+
+  .toggle-switch:checked {
+    @apply bg-green-500;
+  }
+
+  .toggle-switch:checked:before {
+    @apply transform translate-x-6;
+  }
