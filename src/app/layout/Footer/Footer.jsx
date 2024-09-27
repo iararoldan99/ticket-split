@@ -4,7 +4,9 @@ import { FaFacebook, FaTwitter, FaInstagram, FaPinterest, FaDribbble } from 'rea
 const Footer = () => {
   return (
     <footer className="bg-white py-12">
-      <div className="container mx-auto px-4">
+      <div className="w-full border-t border-gray-200"></div>
+      
+      <div className="container mx-auto px-4 mt-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h2 className="text-lg font-bold mb-4">TicketSplit</h2>
@@ -50,7 +52,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 border-t pt-4 text-center text-sm text-gray-600">
+        <div className="mt-8 text-center text-sm text-gray-600">
           © 2024 TicketSplit. Todos los derechos reservados.
         </div>
       </div>

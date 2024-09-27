@@ -1,5 +1,5 @@
+import { motion } from 'framer-motion';
 import React from 'react';
-import { motion } from 'framer-motion'; 
 
 const MovimientoItem = ({ icon, title, date, amount, people }) => {
   return (
@@ -22,7 +22,7 @@ const MovimientoItem = ({ icon, title, date, amount, people }) => {
         </div>
       </div>
       <div className="text-right">
-        <p className="font-semibold text-black">{amount}</p>
+        <p className="font-semibold text-black">${amount}</p>
         <p className="text-sm text-gray-500">{people} personas</p> 
       </div>
     </motion.div>
@@ -30,4 +30,3 @@ const MovimientoItem = ({ icon, title, date, amount, people }) => {
 };
 
 export default MovimientoItem;
-

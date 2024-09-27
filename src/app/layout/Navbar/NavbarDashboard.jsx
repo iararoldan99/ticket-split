@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaChevronDown, FaBars } from 'react-icons/fa';
 import { motion } from 'framer-motion'; 
+import { useSelector } from 'react-redux';
 import logo from '../../assets/img/Icon.svg';
 import userIcon from '../../assets/img/UserIcon.svg';
 
@@ -9,6 +10,7 @@ const NavbarDashboard = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
   
+  const user = useSelector((state) => state.auth.user); 
   const navigate = useNavigate();
   const location = useLocation(); 
 
@@ -21,11 +23,7 @@ const NavbarDashboard = () => {
   };
 
   const handleLogoClick = () => {
-    if (location.pathname === '/account-deleted') {
-      navigate('/');  
-    } else {
-      navigate('/dashboard');  
-    }
+    navigate('/dashboard');
   };
 
   return (
@@ -52,30 +50,30 @@ const NavbarDashboard = () => {
           </button>
         </div>
 
-        <div className={`flex-col md:flex-row items-center space-x-6 hidden md:flex`}>
+        <div className={`flex-col md:flex-row items-center space-x-6 hidden md:flex text-black`}>
           <Link 
             to="/dashboard" 
-            className={`${location.pathname === '/dashboard' ? 'text-gray-500 font-bold' : 'text-gray-500 hover:text-black'}`}
+            className={`${location.pathname === '/dashboard' ? 'font-bold' : 'hover:text-gray-500'}`}
           >
             Inicio
           </Link> 
           <Link 
             to="/dividir-gastos" 
-            className={`${location.pathname === '/dividir-gastos' ? 'text-gray-500 font-bold' : 'text-gray-500 hover:text-black'}`}
+            className={`${location.pathname === '/dividir-gastos' ? 'font-bold' : 'hover:text-gray-500'}`}
           >
             Dividir gastos
           </Link>
           
           <Link 
             to="/viewProjects" 
-            className={`${location.pathname === '/viewProjects' ? 'text-gray-500 font-bold' : 'text-gray-500 hover:text-black'}`}
+            className={`${location.pathname === '/viewProjects' ? 'font-bold' : 'hover:text-gray-500'}`}
           >
             Proyectos
           </Link>
           
           <Link 
             to="/historial" 
-            className={`${location.pathname === '/historial' ? 'text-gray-500 font-bold' : 'text-gray-500 hover:text-black'}`}
+            className={`${location.pathname === '/historial' ? 'font-bold' : 'hover:text-gray-500'}`}
           >
             Historial
           </Link>
@@ -88,7 +86,7 @@ const NavbarDashboard = () => {
                 className="h-8 w-8 rounded-full" 
                 whileHover={{ scale: 1.1 }} 
               />
-              <span>Agus</span>
+              <span>{user?.username || 'Usuario'}</span>
               <FaChevronDown />
             </button>
 
@@ -106,12 +104,6 @@ const NavbarDashboard = () => {
                   Mi cuenta
                 </Link>
                 <Link 
-                  to="/my-account/notifications" 
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:shadow-md"
-                >
-                  Notificaciones
-                </Link>
-                <Link 
                   to="/edit-profile" 
                   className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:shadow-md"
                 >
@@ -125,7 +117,6 @@ const NavbarDashboard = () => {
                 </Link>
               </motion.div>
             )}
-
           </div>
         </div>
       </div>
@@ -139,27 +130,25 @@ const NavbarDashboard = () => {
         >
           <Link 
             to="/dashboard" 
-            className={`${location.pathname === '/dashboard' ? 'block px-4 py-2 text-gray-500 font-bold' : 'block px-4 py-2 text-gray-500 hover:text-black'}`}
+            className={`${location.pathname === '/dashboard' ? 'block px-4 py-2 font-bold' : 'block px-4 py-2 hover:text-gray-500'}`}
           >
             Inicio
           </Link> 
           <Link 
             to="/dividir-gastos" 
-            className={`${location.pathname === '/dividir-gastos' ? 'block px-4 py-2 text-gray-500 font-bold' : 'block px-4 py-2 text-gray-500 hover:text-black'}`}
+            className={`${location.pathname === '/dividir-gastos' ? 'block px-4 py-2 font-bold' : 'block px-4 py-2 hover:text-gray-500'}`}
           >
             Calcular gastos
           </Link>
-          
           <Link 
             to="/viewProjects" 
-            className={`${location.pathname === '/viewProjects' ? 'block px-4 py-2 text-gray-500 font-bold' : 'block px-4 py-2 text-gray-500 hover:text-black'}`}
+            className={`${location.pathname === '/viewProjects' ? 'block px-4 py-2 font-bold' : 'block px-4 py-2 hover:text-gray-500'}`}
           >
             Proyectos
           </Link>
-          
           <Link 
             to="/historial" 
-            className={`${location.pathname === '/historial' ? 'block px-4 py-2 text-gray-500 font-bold' : 'block px-4 py-2 text-gray-500 hover:text-black'}`}
+            className={`${location.pathname === '/historial' ? 'block px-4 py-2 font-bold' : 'block px-4 py-2 hover:text-gray-500'}`}
           >
             Historial
           </Link>
