@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';  
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaChevronDown, FaBars } from 'react-icons/fa';
+import { motion } from 'framer-motion'; 
 import logo from '../../assets/img/Icon.svg';
 import userIcon from '../../assets/img/UserIcon.svg';
 
 const NavbarDashboard = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
+  
+  const navigate = useNavigate();
+  const location = useLocation(); 
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -16,13 +20,31 @@ const NavbarDashboard = () => {
     setMenuOpen(!isMenuOpen);
   };
 
+  const handleLogoClick = () => {
+    if (location.pathname === '/account-deleted') {
+      navigate('/');  
+    } else {
+      navigate('/dashboard');  
+    }
+  };
+
   return (
-    <nav className="bg-white py-4 border-b border-gray-200">
+    <motion.nav
+      initial={{ opacity: 0, y: -50 }} 
+      animate={{ opacity: 1, y: 0 }}   
+      transition={{ duration: 0.6 }}   
+      className="bg-white py-4 border-b border-gray-200"
+    >
       <div className="container mx-auto flex justify-between items-center px-4 md:px-0">
-        <div className="flex items-center space-x-3">
+        <motion.div 
+          className="flex items-center space-x-3 cursor-pointer" 
+          onClick={handleLogoClick}
+          whileHover={{ scale: 1.02 }}  
+          transition={{ type: 'spring', stiffness: 300 }} 
+        >
           <img src={logo} alt="TicketSplit Logo" className="h-8 w-8" />
-          <Link to="/dashboard" className="font-semibold text-black">TicketSplit</Link> 
-        </div>
+          <span className="font-semibold text-black">TicketSplit</span>
+        </motion.div>
 
         <div className="flex items-center md:hidden">
           <button onClick={toggleMenu}>
@@ -31,43 +53,119 @@ const NavbarDashboard = () => {
         </div>
 
         <div className={`flex-col md:flex-row items-center space-x-6 hidden md:flex`}>
-          <Link to="/dashboard" className="text-gray-500 hover:text-black font-bold">Inicio</Link> 
-          <Link to="/dividir-gastos" className="text-gray-500 hover:text-black">Dividir gastos</Link>
+          <Link 
+            to="/dashboard" 
+            className={`${location.pathname === '/dashboard' ? 'text-gray-500 font-bold' : 'text-gray-500 hover:text-black'}`}
+          >
+            Inicio
+          </Link> 
+          <Link 
+            to="/dividir-gastos" 
+            className={`${location.pathname === '/dividir-gastos' ? 'text-gray-500 font-bold' : 'text-gray-500 hover:text-black'}`}
+          >
+            Dividir gastos
+          </Link>
           
-          <Link to="/viewProjects" className="text-gray-500 hover:text-black">Proyectos</Link>
+          <Link 
+            to="/viewProjects" 
+            className={`${location.pathname === '/viewProjects' ? 'text-gray-500 font-bold' : 'text-gray-500 hover:text-black'}`}
+          >
+            Proyectos
+          </Link>
           
-          <Link to="/historial" className="text-gray-500 hover:text-black">Historial</Link>
+          <Link 
+            to="/historial" 
+            className={`${location.pathname === '/historial' ? 'text-gray-500 font-bold' : 'text-gray-500 hover:text-black'}`}
+          >
+            Historial
+          </Link>
 
           <div className="relative"> 
             <button onClick={toggleDropdown} className="flex items-center space-x-2">
-              <img src={userIcon} alt="User Icon" className="h-8 w-8 rounded-full" />
+              <motion.img 
+                src={userIcon} 
+                alt="User Icon" 
+                className="h-8 w-8 rounded-full" 
+                whileHover={{ scale: 1.1 }} 
+              />
               <span>Agus</span>
               <FaChevronDown />
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50"> 
-                <Link to="/mi-cuenta" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi cuenta</Link>
-                <Link to="/notificaciones" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Notificaciones</Link>
-                <Link to="/configuracion" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Configuración</Link>
-                <Link to="/logout" className="block px-4 py-2 text-red-500 hover:bg-gray-100">Cerrar sesión</Link> 
-              </div>
+              <motion.div 
+                initial={{ opacity: 0 }} 
+                animate={{ opacity: 1 }} 
+                transition={{ duration: 0.3 }} 
+                className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50"
+              > 
+                <Link 
+                  to="/my-account" 
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:shadow-md"
+                >
+                  Mi cuenta
+                </Link>
+                <Link 
+                  to="/my-account/notifications" 
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:shadow-md"
+                >
+                  Notificaciones
+                </Link>
+                <Link 
+                  to="/edit-profile" 
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:shadow-md"
+                >
+                  Configuración
+                </Link>
+                <Link 
+                  to="/logout" 
+                  className="block px-4 py-2 text-red-500 hover:bg-gray-100 hover:shadow-md"
+                >
+                  Cerrar sesión
+                </Link>
+              </motion.div>
             )}
+
           </div>
         </div>
       </div>
 
       {isMenuOpen && (
-        <div className="md:hidden bg-white py-2">
-          <Link to="/dashboard" className="block px-4 py-2 text-gray-500 hover:text-black font-bold">Inicio</Link> 
-          <Link to="/dividir-gastos" className="block px-4 py-2 text-gray-500 hover:text-black">Calcular gastos</Link>
+        <motion.div 
+          initial={{ opacity: 0 }} 
+          animate={{ opacity: 1 }} 
+          transition={{ duration: 0.3 }} 
+          className="md:hidden bg-white py-2"
+        >
+          <Link 
+            to="/dashboard" 
+            className={`${location.pathname === '/dashboard' ? 'block px-4 py-2 text-gray-500 font-bold' : 'block px-4 py-2 text-gray-500 hover:text-black'}`}
+          >
+            Inicio
+          </Link> 
+          <Link 
+            to="/dividir-gastos" 
+            className={`${location.pathname === '/dividir-gastos' ? 'block px-4 py-2 text-gray-500 font-bold' : 'block px-4 py-2 text-gray-500 hover:text-black'}`}
+          >
+            Calcular gastos
+          </Link>
           
-          <Link to="/viewProjects" className="block px-4 py-2 text-gray-500 hover:text-black">Proyectos</Link>
+          <Link 
+            to="/viewProjects" 
+            className={`${location.pathname === '/viewProjects' ? 'block px-4 py-2 text-gray-500 font-bold' : 'block px-4 py-2 text-gray-500 hover:text-black'}`}
+          >
+            Proyectos
+          </Link>
           
-          <Link to="/historial" className="block px-4 py-2 text-gray-500 hover:text-black">Historial</Link>
-        </div>
+          <Link 
+            to="/historial" 
+            className={`${location.pathname === '/historial' ? 'block px-4 py-2 text-gray-500 font-bold' : 'block px-4 py-2 text-gray-500 hover:text-black'}`}
+          >
+            Historial
+          </Link>
+        </motion.div>
       )}
-    </nav>
+    </motion.nav>
   );
 };
 
