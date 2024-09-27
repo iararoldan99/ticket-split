@@ -40,23 +40,6 @@ const MyAccount = () => {
 
           <div className="w-full lg:w-3/4 p-8 mt-16">
             <AccountForm fields={fields} />
-
-            <div className="mt-6">
-              <label className="block text-sm font-medium text-black">
-                Desactivar anuncios <span className="bg-[#B9FF66] text-black font-bold px-1 rounded">PRO</span>
-              </label>
-              <p className="text-gray-500 mt-1">Desactivá los anuncios con una subscripción mensual para cuentas Pro.</p>
-            </div>
-
-            <div className="mt-8 text-left">  
-              <button
-                type="button"
-                onClick={handleSubmit}
-                className="bg-[#B9FF66] text-black py-2 px-4 rounded-lg shadow-sm hover:bg-[#a3e65b] transition duration-300 font-semibold"
-              >
-                Guardar cambios
-              </button>
-            </div>
           </div>
         </div>
         <Footer />

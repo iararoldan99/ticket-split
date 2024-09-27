@@ -14,7 +14,7 @@ const UpdatePassword = () => {
         <div className="w-full flex flex-col lg:flex-row mt-10 px-6 lg:px-8 space-y-10 lg:space-y-0 lg:ml-40">
           
           <div>
-            <HeaderIcon userName="Agus" sectionName="Update Password" />
+            <HeaderIcon userName="Agus" sectionName="Contraseña" />
             <SidebarNavigation />
           </div>
 

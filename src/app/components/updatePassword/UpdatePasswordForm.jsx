@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const UpdatePasswordForm = () => {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -9,11 +10,11 @@ const UpdatePasswordForm = () => {
     e.preventDefault();
 
     if (newPassword !== confirmPassword) {
-      alert("Passwords do not match");
+      alert("Las contraseñas no coinciden");
       return;
     }
 
-    console.log("Password updated successfully:", {
+    console.log("Contraseña actualizada con éxito:", {
       currentPassword,
       newPassword,
       confirmPassword
@@ -25,73 +26,92 @@ const UpdatePasswordForm = () => {
   };
 
   return (
-    <div className="relative w-full lg:w-[90%] mx-auto"> 
-      <form className="space-y-6 w-full max-w-lg mx-auto mt-16 mr-20" style={{ marginRight: '30rem' }} onSubmit={handleSubmit}>
+    <motion.div 
+      className="relative w-full lg:w-[80%] mx-0 mt-20"  
+      initial={{ opacity: 0, y: 20 }}  
+      animate={{ opacity: 1, y: 0 }}    
+      transition={{ duration: 1.2, ease: "easeOut" }}
+    > 
+      <motion.form 
+        className="space-y-6 w-full"
+        onSubmit={handleSubmit}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}  
+      >
         <div>
           <label className="block text-sm font-medium text-black" htmlFor="currentPassword">
-            Current Password
+            Contraseña actual
           </label>
-          <input
+          <motion.input
             type="password"
             id="currentPassword"
             name="currentPassword"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-black focus:ring-0 sm:text-sm"
-            placeholder="Enter your current password"
+            className="mt-1 block lg:w-2/3 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-black focus:ring-0 sm:text-sm"
+            placeholder="Ingrese su contraseña actual"
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
             required
+            whileFocus={{ scale: 1.01 }}
+            transition={{ type: 'spring', stiffness: 300 }}
           />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-black" htmlFor="newPassword">
-            New Password
+            Nueva contraseña 
           </label>
-          <input
+          <motion.input
             type="password"
             id="newPassword"
             name="newPassword"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-black focus:ring-0 sm:text-sm"
-            placeholder="Enter your new password"
+            className="mt-1 block lg:w-2/3 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-black focus:ring-0 sm:text-sm"
+            placeholder="Ingrese su nueva contraseña"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             required
+            whileFocus={{ scale: 1.01 }}
+            transition={{ type: 'spring', stiffness: 300 }}
           />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-black" htmlFor="confirmPassword">
-            Confirm New Password
+            Confirmar nueva contraseña
           </label>
-          <input
+          <motion.input
             type="password"
             id="confirmPassword"
             name="confirmPassword"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-black focus:ring-0 sm:text-sm"
-            placeholder="Confirm your new password"
+            className="mt-1 block lg:w-2/3 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-black focus:ring-0 sm:text-sm"
+            placeholder="Confirme su nueva contraseña"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
+            whileFocus={{ scale: 1.01 }}
+            transition={{ type: 'spring', stiffness: 300 }}
           />
         </div>
 
-        <div className="ml-0 mt-4">
+        <div className="mt-6">
           <label className="block text-sm font-medium text-black">
-            Disable Ads <span className="bg-[#B9FF66] text-black font-medium px-1 rounded">PRO</span>
+            Desactivar anuncios <span className="bg-[#B9FF66] text-black font-bold px-1 rounded">PRO</span>
           </label>
-          <p className="text-gray-500 mt-1">Disable ads with a monthly subscription for Pro accounts.</p>
+          <p className="text-gray-500 mt-1">Desactívalos con una suscripción mensual para cuentas Pro.</p>
         </div>
 
-        <div className="flex justify-end mt-4">
-          <button
+        <div className="flex justify-end mt-4 lg:ml-auto lg:w-2/3"> 
+          <motion.button
             type="submit"
             className="bg-[#B9FF66] text-black py-2 px-4 rounded-lg shadow-sm hover:bg-[#a3e65b] transition duration-300 font-semibold"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            Update Password
-          </button>
+            Actualizar contraseña
+          </motion.button>
         </div>
-      </form>
-    </div>
+      </motion.form>
+    </motion.div>
   );
 };
 
