@@ -191,7 +191,7 @@ const SplitBill = () => {
               )}
 
               <button
-                className={`mt-8 w-full p-3 rounded-lg font-semibold text-white ${percentageError || exceedError ? 'bg-gray-400' : 'bg-green-500 hover:bg-green-600'
+                className={`mt-8 w-full p-3 rounded-lg font-semibold text-black ${percentageError || exceedError ? 'bg-[#B9FF66]' : 'bg-[#B9FF66] hover:bg-[#a3e65b]'
                   }`}
                 onClick={handleSubmit}
                 disabled={percentageError || exceedError}

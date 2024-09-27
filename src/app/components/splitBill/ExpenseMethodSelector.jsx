@@ -6,13 +6,13 @@ const ExpenseMethodSelector = ({ splitMethod, onSelectMethod }) => {
       <p className="text-gray-700 font-medium">¿Cómo deseas dividir los gastos?</p>
       <div className="flex justify-center space-x-4 mt-4">
         <button
-          className={`p-3 rounded-lg font-semibold ${splitMethod === 'equitative' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+          className={`p-3 rounded-lg font-semibold ${splitMethod === 'equitative' ? 'bg-[#B9FF66] text-black hover:bg-[#A0E64D]' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
           onClick={() => onSelectMethod('equitative')}
         >
           Equitativo
         </button>
         <button
-          className={`p-3 rounded-lg font-semibold ${splitMethod === 'percentage' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+          className={`p-3 rounded-lg font-semibold ${splitMethod === 'percentage' ? 'bg-[#B9FF66] text-black' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
           onClick={() => onSelectMethod('percentage')}
         >
           Por porcentaje

@@ -20,6 +20,11 @@ const NavbarDashboard = () => {
     setMenuOpen(!isMenuOpen);
   };
 
+  const handleNavigation = (path) => {
+    setDropdownOpen(false);
+    navigate(path); 
+  };
+
   const handleLogoClick = () => {
     if (location.pathname === '/account-deleted') {
       navigate('/');  
@@ -33,7 +38,7 @@ const NavbarDashboard = () => {
       initial={{ opacity: 0, y: -50 }} 
       animate={{ opacity: 1, y: 0 }}   
       transition={{ duration: 0.6 }}   
-      className="bg-white py-4 border-b border-gray-200"
+      className="bg-white py-4 border-b border-gray-200 relative z-50"  
     >
       <div className="container mx-auto flex justify-between items-center px-4 md:px-0">
         <motion.div 
@@ -55,37 +60,38 @@ const NavbarDashboard = () => {
         <div className={`flex-col md:flex-row items-center space-x-6 hidden md:flex`}>
           <Link 
             to="/dashboard" 
-            className={`${location.pathname === '/dashboard' ? 'text-gray-500 font-bold' : 'text-gray-500 hover:text-black'}`}
+            className={`${location.pathname === '/dashboard' ? 'text-green-500 font-bold' : 'text-black hover:text-gray-700'}`}
           >
             Inicio
           </Link> 
           <Link 
             to="/dividir-gastos" 
-            className={`${location.pathname === '/dividir-gastos' ? 'text-gray-500 font-bold' : 'text-gray-500 hover:text-black'}`}
+            className={`${location.pathname === '/dividir-gastos' ? 'text-green-500 font-bold' : 'text-black hover:text-gray-700'}`}
           >
             Dividir gastos
           </Link>
           
           <Link 
             to="/viewProjects" 
-            className={`${location.pathname === '/viewProjects' ? 'text-gray-500 font-bold' : 'text-gray-500 hover:text-black'}`}
+            className={`${location.pathname === '/viewProjects' ? 'text-green-500 font-bold' : 'text-black hover:text-gray-700'}`}
           >
             Proyectos
           </Link>
           
           <Link 
             to="/historial" 
-            className={`${location.pathname === '/historial' ? 'text-gray-500 font-bold' : 'text-gray-500 hover:text-black'}`}
+            className={`${location.pathname === '/historial' ? 'text-green-500 font-bold' : 'text-black hover:text-gray-700'}`}
           >
             Historial
           </Link>
 
-          <div className="relative"> 
+          <div className="relative z-50">
             <button onClick={toggleDropdown} className="flex items-center space-x-2">
               <motion.img 
                 src={userIcon} 
                 alt="User Icon" 
-                className="h-8 w-8 rounded-full" 
+                className="h-8 w-8 rounded-full cursor-pointer"
+                onClick={() => handleNavigation('/edit-profile')}  
                 whileHover={{ scale: 1.1 }} 
               />
               <span>Agus</span>
@@ -99,33 +105,32 @@ const NavbarDashboard = () => {
                 transition={{ duration: 0.3 }} 
                 className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50"
               > 
-                <Link 
-                  to="/my-account" 
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:shadow-md"
+                <button 
+                  onClick={() => handleNavigation('/my-account')} 
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:shadow-md w-full text-left"
                 >
                   Mi cuenta
-                </Link>
-                <Link 
-                  to="/my-account/notifications" 
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:shadow-md"
+                </button>
+                <button 
+                  onClick={() => handleNavigation('/my-account/notifications')} 
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:shadow-md w-full text-left"
                 >
                   Notificaciones
-                </Link>
-                <Link 
-                  to="/edit-profile" 
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:shadow-md"
+                </button>
+                <button 
+                  onClick={() => handleNavigation('/edit-profile')}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:shadow-md w-full text-left"
                 >
                   Configuración
-                </Link>
-                <Link 
-                  to="/logout" 
-                  className="block px-4 py-2 text-red-500 hover:bg-gray-100 hover:shadow-md"
+                </button>
+                <button 
+                  onClick={() => handleNavigation('/logout')}
+                  className="block px-4 py-2 text-red-500 hover:bg-gray-100 hover:shadow-md w-full text-left"
                 >
                   Cerrar sesión
-                </Link>
+                </button>
               </motion.div>
             )}
-
           </div>
         </div>
       </div>
@@ -139,27 +144,27 @@ const NavbarDashboard = () => {
         >
           <Link 
             to="/dashboard" 
-            className={`${location.pathname === '/dashboard' ? 'block px-4 py-2 text-gray-500 font-bold' : 'block px-4 py-2 text-gray-500 hover:text-black'}`}
+            className={`${location.pathname === '/dashboard' ? 'block px-4 py-2 text-green-500 font-bold' : 'block px-4 py-2 text-black hover:text-gray-700'}`}
           >
             Inicio
           </Link> 
           <Link 
             to="/dividir-gastos" 
-            className={`${location.pathname === '/dividir-gastos' ? 'block px-4 py-2 text-gray-500 font-bold' : 'block px-4 py-2 text-gray-500 hover:text-black'}`}
+            className={`${location.pathname === '/dividir-gastos' ? 'block px-4 py-2 text-green-500 font-bold' : 'block px-4 py-2 text-black hover:text-gray-700'}`}
           >
             Calcular gastos
           </Link>
           
           <Link 
             to="/viewProjects" 
-            className={`${location.pathname === '/viewProjects' ? 'block px-4 py-2 text-gray-500 font-bold' : 'block px-4 py-2 text-gray-500 hover:text-black'}`}
+            className={`${location.pathname === '/viewProjects' ? 'block px-4 py-2 text-green-500 font-bold' : 'block px-4 py-2 text-black hover:text-gray-700'}`}
           >
             Proyectos
           </Link>
           
           <Link 
             to="/historial" 
-            className={`${location.pathname === '/historial' ? 'block px-4 py-2 text-gray-500 font-bold' : 'block px-4 py-2 text-gray-500 hover:text-black'}`}
+            className={`${location.pathname === '/historial' ? 'block px-4 py-2 text-green-500 font-bold' : 'block px-4 py-2 text-black hover:text-gray-700'}`}
           >
             Historial
           </Link>

@@ -9,7 +9,9 @@ import UltimosMovimientos from '../../components/dashboard/UltimosMovimientos';
 const Dashboard = () => {
   return (
     <>
-      <NavbarDashboard />
+      <div className="relative z-50">
+        <NavbarDashboard />
+      </div>
       <div className="min-h-screen flex flex-col justify-between bg-white">
         <Greeting />
         <div className="mt-10 flex flex-col items-center">

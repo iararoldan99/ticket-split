@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const NotificationsForm = () => {
   const [pendingBalance, setPendingBalance] = useState(true);
@@ -19,97 +20,62 @@ const NotificationsForm = () => {
   };
 
   return (
-    <form className="space-y-6 w-full max-w-xl mx-auto px-4 lg:px-0" onSubmit={handleSubmit}>
-      <h2 className="text-xl font-bold mb-4 text-black">Notificaciones</h2>
-      <p className="text-gray-600 mb-6">Administrá las notificaciones que recibís</p>
+    <motion.form 
+      className="space-y-6 w-full max-w-xl mx-auto px-0 lg:px-0 mt-20 ml-4" 
+      onSubmit={handleSubmit}
+      initial={{ opacity: 0, y: 20 }}  // Comienza fuera de la pantalla
+      animate={{ opacity: 1, y: 0 }}  // Se desplaza hacia su posición
+      transition={{ duration: 0.8, ease: "easeOut" }}  // Suave animación de aparición
+    >
+      <h2 className="text-xl font-bold mb-2 text-black">Notificaciones</h2>
+      <p className="text-gray-600 mb-4">Administrá las notificaciones que recibís</p>
 
-      {/* Notificación: Saldos pendientes */}
-      <div className="flex items-center justify-between mb-4">
-        <label className="block text-md text-gray-800">Saldos pendientes</label>
-        <label className="relative inline-flex items-center cursor-pointer">
-          <input
-            type="checkbox"
-            className="sr-only peer"
-            checked={pendingBalance}
-            onChange={() => setPendingBalance(!pendingBalance)}
-          />
-          <div className="w-11 h-6 bg-gray-300 rounded-full peer-checked:bg-green-500 transition-all"></div>
-          <div className="absolute top-[2px] left-[2px] w-5 h-5 bg-white rounded-full transition-transform duration-300 ease-in-out peer-checked:translate-x-5"></div>
-        </label>
-      </div>
+      {/* Notificaciones con animaciones */}
+      {[
+        { label: "Saldos pendientes", state: pendingBalance, setState: setPendingBalance },
+        { label: "Nuevos proyectos", state: newProjects, setState: setNewProjects },
+        { label: "Nuevos amigos", state: newFriends, setState: setNewFriends },
+        { label: "Notificaciones push", state: pushNotifications, setState: setPushNotifications },
+        { label: "Notificaciones e-mail", state: emailNotifications, setState: setEmailNotifications }
+      ].map((item, index) => (
+        <motion.div
+          key={index}
+          className="bg-gray-100 rounded-lg p-4 mb-4 flex items-center justify-between"
+          whileHover={{ scale: 1.02 }}  // Efecto hover
+          transition={{ duration: 0.3 }}
+        >
+          <label className="block text-md text-gray-800">{item.label}</label>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              className="sr-only peer"
+              checked={item.state}
+              onChange={() => item.setState(!item.state)}
+            />
+            <div className="w-11 h-6 bg-gray-300 rounded-full peer-checked:bg-green-500 transition-all"></div>
+            <div className="absolute top-[2px] left-[2px] w-5 h-5 bg-white rounded-full transition-transform duration-300 ease-in-out peer-checked:translate-x-5"></div>
+          </label>
+        </motion.div>
+      ))}
 
-      {/* Notificación: Nuevos proyectos */}
-      <div className="flex items-center justify-between mb-4">
-        <label className="block text-md text-gray-800">Nuevos proyectos</label>
-        <label className="relative inline-flex items-center cursor-pointer">
-          <input
-            type="checkbox"
-            className="sr-only peer"
-            checked={newProjects}
-            onChange={() => setNewProjects(!newProjects)}
-          />
-          <div className="w-11 h-6 bg-gray-300 rounded-full peer-checked:bg-green-500 transition-all"></div>
-          <div className="absolute top-[2px] left-[2px] w-5 h-5 bg-white rounded-full transition-transform duration-300 ease-in-out peer-checked:translate-x-5"></div>
-        </label>
-      </div>
-
-      {/* Notificación: Nuevos amigos */}
-      <div className="flex items-center justify-between mb-4">
-        <label className="block text-md text-gray-800">Nuevos amigos</label>
-        <label className="relative inline-flex items-center cursor-pointer">
-          <input
-            type="checkbox"
-            className="sr-only peer"
-            checked={newFriends}
-            onChange={() => setNewFriends(!newFriends)}
-          />
-          <div className="w-11 h-6 bg-gray-300 rounded-full peer-checked:bg-green-500 transition-all"></div>
-          <div className="absolute top-[2px] left-[2px] w-5 h-5 bg-white rounded-full transition-transform duration-300 ease-in-out peer-checked:translate-x-5"></div>
-        </label>
-      </div>
-
-      {/* Notificación: Notificaciones push */}
-      <div className="flex items-center justify-between mb-4">
-        <label className="block text-md text-gray-800">Notificaciones push</label>
-        <label className="relative inline-flex items-center cursor-pointer">
-          <input
-            type="checkbox"
-            className="sr-only peer"
-            checked={pushNotifications}
-            onChange={() => setPushNotifications(!pushNotifications)}
-          />
-          <div className="w-11 h-6 bg-gray-300 rounded-full peer-checked:bg-green-500 transition-all"></div>
-          <div className="absolute top-[2px] left-[2px] w-5 h-5 bg-white rounded-full transition-transform duration-300 ease-in-out peer-checked:translate-x-5"></div>
-        </label>
-      </div>
-
-      {/* Notificación: Notificaciones e-mail */}
-      <div className="flex items-center justify-between mb-4">
-        <label className="block text-md text-gray-800">Notificaciones e-mail</label>
-        <label className="relative inline-flex items-center cursor-pointer">
-          <input
-            type="checkbox"
-            className="sr-only peer"
-            checked={emailNotifications}
-            onChange={() => setEmailNotifications(!emailNotifications)}
-          />
-          <div className="w-11 h-6 bg-gray-300 rounded-full peer-checked:bg-green-500 transition-all"></div>
-          <div className="absolute top-[2px] left-[2px] w-5 h-5 bg-white rounded-full transition-transform duration-300 ease-in-out peer-checked:translate-x-5"></div>
-        </label>
-      </div>
-
-      {/* Botón Guardar cambios */}
-      <div className="flex justify-end mt-6">
-        <button
+      {/* Botón con animación */}
+      <motion.div 
+        className="flex justify-end mt-6"
+        initial={{ opacity: 0, y: 10 }}  // Aparece suavemente desde abajo
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+        <motion.button
           type="submit"
           className="bg-[#B9FF66] text-black py-2 px-6 rounded-lg shadow-sm hover:bg-[#a3e65b] transition duration-300 font-semibold"
+          whileHover={{ scale: 1.05 }}  // Botón se agranda ligeramente al pasar el mouse
+          whileTap={{ scale: 0.95 }}    // Botón se achica al hacer click
         >
           Guardar cambios
-        </button>
-      </div>
-    </form>
+        </motion.button>
+      </motion.div>
+    </motion.form>
   );
 };
 
 export default NotificationsForm;
-

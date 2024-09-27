@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavbarDashboard from '../../layout/Navbar/NavbarDashboard';
+import NavbarSimple from '../../layout/Navbar/NavbarSimple';
 import Footer from '../../layout/Footer/Footer';
 import deletedAccountImage from '../../assets/img/deletedAccount.svg'; 
 
@@ -9,7 +9,7 @@ const AccountDeletedPage = () => {
 
   return (
     <>
-      <NavbarDashboard />
+      <NavbarSimple />
       <div className="min-h-screen flex flex-col justify-center items-center bg-white">
         <div className="w-full p-8 flex flex-col lg:flex-row items-center justify-between text-center lg:text-left">
           
