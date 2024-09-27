@@ -12,6 +12,12 @@ import ProjectCreate from './app/pages/ProjectCreate/ProjectCreate';
 import ViewProjects from './app/pages/ViewProjects/ViewProjects'; 
 import ProjectDetails from './app/pages/ProjectDetails/ProjectDetails'; 
 import MyAccount from './app/pages/MyAccount/MyAccount'; 
+import EditProfile from './app/pages/EditProfile/EditProfile';  
+import UpdatePassword from './app/pages/UpdatePassword/UpdatePassword';  
+import Notifications from './app/pages/Notifications/Notifications';  
+import SessionsPage from './app/pages/Sessions/SessionsPage';
+import DeleteAccountPage from './app/pages/DeleteAccount/DeleteAccountPage';
+import AccountDeletedPage from './app/pages/AccountDeleted/AccountDeletedPage';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -28,7 +34,13 @@ function AnimatedRoutes() {
         <Route path="/projectCreate" element={<ProjectCreate />} />
         <Route path="/viewProjects" element={<ViewProjects />} /> 
         <Route path="/projects/:projectName" element={<ProjectDetails />} /> 
-        <Route path="/my-account" element={<MyAccount />} />
+        <Route path="/my-account" element={<MyAccount />} />  
+        <Route path="/edit-profile" element={<EditProfile />} />  
+        <Route path="/update-password" element={<UpdatePassword />} />  
+        <Route path="/my-account/notifications" element={<Notifications />} />
+        <Route path="/my-account/sessions" element={<SessionsPage />} />
+        <Route path="/my-account/delete-account" element={<DeleteAccountPage />} />
+        <Route path="/account-deleted" element={<AccountDeletedPage />} />      
       </Routes>
     </AnimatePresence>
   );
@@ -45,3 +57,4 @@ function App() {
 }
 
 export default App;
+
