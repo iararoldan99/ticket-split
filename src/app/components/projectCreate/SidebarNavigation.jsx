@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const SidebarNavigation = () => {
-  const location = useLocation(); // Hook para obtener la ruta actual
+  const location = useLocation(); 
 
   return (
     <div className="w-full lg:w-1/4 p-6 mb-8 lg:mb-0 flex flex-col ml-8">

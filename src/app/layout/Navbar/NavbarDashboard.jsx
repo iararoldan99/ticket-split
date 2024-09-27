@@ -30,12 +30,10 @@ const NavbarDashboard = () => {
           </button>
         </div>
 
-        {/* Menú en pantallas grandes */}
         <div className={`flex-col md:flex-row items-center space-x-6 hidden md:flex`}>
           <Link to="/dashboard" className="text-gray-500 hover:text-black font-bold">Inicio</Link> 
-          <Link to="/calcular-gastos" className="text-gray-500 hover:text-black">Calcular gastos</Link>
+          <Link to="/dividir-gastos" className="text-gray-500 hover:text-black">Dividir gastos</Link>
           
-          {/* Enlace a Ver Proyectos */}
           <Link to="/viewProjects" className="text-gray-500 hover:text-black">Proyectos</Link>
           
           <Link to="/historial" className="text-gray-500 hover:text-black">Historial</Link>
@@ -47,26 +45,23 @@ const NavbarDashboard = () => {
               <FaChevronDown />
             </button>
 
-            {/* Dropdown en pantallas grandes */}
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50"> 
                 <Link to="/mi-cuenta" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi cuenta</Link>
                 <Link to="/notificaciones" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Notificaciones</Link>
                 <Link to="/configuracion" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Configuración</Link>
-                <Link to="/logout" className="block px-4 py-2 text-red-500 hover:bg-gray-100">Cerrar sesión</Link> {/* Cambia el color del texto */}
+                <Link to="/logout" className="block px-4 py-2 text-red-500 hover:bg-gray-100">Cerrar sesión</Link> 
               </div>
             )}
           </div>
         </div>
       </div>
 
-      {/* Menú en pantallas móviles */}
       {isMenuOpen && (
         <div className="md:hidden bg-white py-2">
           <Link to="/dashboard" className="block px-4 py-2 text-gray-500 hover:text-black font-bold">Inicio</Link> 
-          <Link to="/calcular-gastos" className="block px-4 py-2 text-gray-500 hover:text-black">Calcular gastos</Link>
+          <Link to="/dividir-gastos" className="block px-4 py-2 text-gray-500 hover:text-black">Calcular gastos</Link>
           
-          {/* Enlace a Ver Proyectos */}
           <Link to="/viewProjects" className="block px-4 py-2 text-gray-500 hover:text-black">Proyectos</Link>
           
           <Link to="/historial" className="block px-4 py-2 text-gray-500 hover:text-black">Historial</Link>

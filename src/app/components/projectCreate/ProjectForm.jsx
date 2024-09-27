@@ -59,12 +59,11 @@ const ProjectForm = ({ initialProjectName = '', initialDescription = '', members
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-black focus:ring-0 sm:text-sm"
             placeholder="Descripción del proyecto"
             value={description}
-            onChange={(e) => setDescription(e.target.value)} // Permitir la edición de la descripción
+            onChange={(e) => setDescription(e.target.value)} 
             rows="4"
           ></textarea>
         </div>
 
-        {/* Miembros */}
         <div className="grid grid-cols-3 gap-4">
           {members.map((member, index) => (
             <div key={index} className="text-center">
@@ -95,15 +94,13 @@ const ProjectForm = ({ initialProjectName = '', initialDescription = '', members
         </div>
       </form>
 
-      {/* Ícono del proyecto */}
       <div className="relative lg:absolute top-0 right-0 flex flex-col items-center mt-10 lg:mt-0 lg:right-[-5px]">
         <p className="text-sm font-bold text-black mb-2">Ícono</p>
         <img
-          src={heroImage} // Puedes cambiar heroImage por la URL del ícono que desees
+          src={heroImage} 
           alt="Ícono del proyecto"
           className="w-36 h-36 rounded-full object-cover mb-4"
         />
-        {/* Botón Editar */}
         <button className="bg-[#B9FF66] text-black font-medium py-2 px-4 rounded-md shadow-sm hover:bg-[#a3e65b] transition duration-300">
           Editar
         </button>

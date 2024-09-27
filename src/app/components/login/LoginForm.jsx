@@ -1,7 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext'; 
+import { useDispatch } from 'react-redux';  
+import { login } from '../../redux/authSlice';  
 import mobileAppImage from '../../assets/img/Group 1948759423 (1).svg';
 import playStoreImg from '../../assets/img/App Store.svg';
 import appImg from '../../assets/img/Google Play.svg';
@@ -10,16 +11,16 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const { login } = useContext(AuthContext); 
+  const dispatch = useDispatch();  
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const success = login(email, password);  
+    const success = dispatch(login({ email, password })); 
     if (success) {
-      navigate('/dashboard'); 
+      navigate('/dashboard');
     } else {
-      setErrorMessage('Usuario o contraseña incorrectos');  
+      setErrorMessage('Usuario o contraseña incorrectos');
     }
   };
 
