@@ -11,7 +11,6 @@ import user4 from '../../assets/img/user4.svg';
 import user5 from '../../assets/img/user5.svg'; 
 import user6 from '../../assets/img/user6.svg'; 
 
-
 const ProjectDetails = () => {
   const projectData = {
     projectName: 'Fiesta en casa',
@@ -38,8 +37,8 @@ const ProjectDetails = () => {
             </div>
             <div className="w-full lg:w-3/4 p-8 mt-16">
               <ProjectForm
-                projectName={projectData.projectName}
-                description={projectData.description}
+                initialProjectName={projectData.projectName}
+                initialDescription={projectData.description}
                 members={projectData.members}
               />
             </div>

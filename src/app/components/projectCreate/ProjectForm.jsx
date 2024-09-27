@@ -5,15 +5,29 @@ const ProjectForm = ({ initialProjectName = '', initialDescription = '', members
   const [projectName, setProjectName] = useState(initialProjectName); 
   const [description, setDescription] = useState(initialDescription);
   const [newMember, setNewMember] = useState(''); 
+  const [projectMembers, setProjectMembers] = useState(members); 
+  const [isEditing, setIsEditing] = useState(false); 
 
   const handleAddMember = () => {
-    console.log(`Nuevo miembro: ${newMember}`);
-    setNewMember(''); 
+    if (newMember.trim() === '') return;
+    const newMemberData = { name: newMember, image: '' };
+    setProjectMembers([...projectMembers, newMemberData]);
+    setNewMember('');
+  };
+
+  const handleEdit = () => {
+    setIsEditing(true); 
+  };
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    console.log('Datos guardados:', { projectName, description, projectMembers });
+    setIsEditing(false); 
   };
 
   return (
     <div className="relative w-full lg:w-[150%] mx-auto"> 
-      <form className="space-y-6 w-full lg:w-[70%]"> 
+      <form className="space-y-6 w-full lg:w-[70%]" onSubmit={handleSave}> 
         <div>
           <label className="block text-sm font-medium text-black" htmlFor="projectName">
             Nombre
@@ -24,7 +38,8 @@ const ProjectForm = ({ initialProjectName = '', initialDescription = '', members
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-black focus:ring-0 sm:text-sm"
             placeholder="Nombre del proyecto"
             value={projectName}
-            onChange={(e) => setProjectName(e.target.value)} 
+            onChange={(e) => setProjectName(e.target.value)}
+            readOnly={!isEditing} 
           />
         </div>
 
@@ -39,11 +54,13 @@ const ProjectForm = ({ initialProjectName = '', initialDescription = '', members
               placeholder="Nombre del usuario"
               value={newMember}
               onChange={(e) => setNewMember(e.target.value)}
+              disabled={!isEditing}
             />
             <button
               type="button"
               className="bg-[#B9FF66] text-black font-medium py-2 px-4 rounded-md shadow-sm hover:bg-[#a3e65b] transition duration-300"
               onClick={handleAddMember}
+              disabled={!isEditing}  
             >
               Añadir
             </button>
@@ -59,13 +76,14 @@ const ProjectForm = ({ initialProjectName = '', initialDescription = '', members
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-black focus:ring-0 sm:text-sm"
             placeholder="Descripción del proyecto"
             value={description}
-            onChange={(e) => setDescription(e.target.value)} 
+            onChange={(e) => setDescription(e.target.value)}
+            readOnly={!isEditing} 
             rows="4"
           ></textarea>
         </div>
 
         <div className="grid grid-cols-3 gap-4">
-          {members.map((member, index) => (
+          {projectMembers.map((member, index) => (
             <div key={index} className="text-center">
               <img
                 src={member.image || heroImage}
@@ -85,12 +103,24 @@ const ProjectForm = ({ initialProjectName = '', initialDescription = '', members
         </div>
 
         <div className="mt-6 flex justify-end space-x-4">
-          <button
-            type="submit"
-            className="bg-[#B9FF66] text-black font-medium py-2 px-4 rounded-md shadow-sm hover:bg-[#a3e65b] transition duration-300"
-          >
-            Guardar cambios
-          </button>
+          {!isEditing && (
+            <button
+              type="button"
+              className="bg-gray-300 text-black font-medium py-2 px-4 rounded-md shadow-sm hover:bg-gray-400 transition duration-300"
+              onClick={handleEdit}
+            >
+              Editar
+            </button>
+          )}
+
+          {isEditing && ( 
+            <button
+              type="submit"
+              className="bg-[#B9FF66] text-black font-medium py-2 px-4 rounded-md shadow-sm hover:bg-[#a3e65b] transition duration-300"
+            >
+              Guardar cambios
+            </button>
+          )}
         </div>
       </form>
 
@@ -110,4 +140,3 @@ const ProjectForm = ({ initialProjectName = '', initialDescription = '', members
 };
 
 export default ProjectForm;
-
