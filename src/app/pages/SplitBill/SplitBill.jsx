@@ -137,16 +137,6 @@ const SplitBill = () => {
 
   return (
     <>
-      {showModal && (
-        <SplitBillModal
-          message={{
-            title: '¡Gasto guardado con éxito!',
-            body: `ID de transacción: ${transactionId}`,
-          }}
-          onClose={handleModalClose}
-        />
-      )}
-
       <motion.div
         initial="initial"
         animate="animate"
@@ -207,9 +197,8 @@ const SplitBill = () => {
                         type="text"
                         value={percentages[index]}
                         onChange={(e) => handlePercentageChange(index, e.target.value)}
-                        className={`w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary ${
-                          exceedError ? 'border-red-500' : ''
-                        }`}
+                        className={`w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary ${exceedError ? 'border-red-500' : ''
+                          }`}
                         placeholder="Ej: 50%"
                         disabled={totalPercentage >= 100 && percentages[index] === 0}
                       />
@@ -232,10 +221,8 @@ const SplitBill = () => {
               )}
 
               <button
-                className={`mt-8 w-full p-3 rounded-lg font-semibold text-white ${
-                  percentageError || exceedError ? 'bg-gray-400' : 'bg-green-500 hover:bg-green-600'
-                }`}
-                onClick={handleSubmit}
+                className={`mt-8 w-full p-3 rounded-lg font-semibold text-black ${percentageError || exceedError ? 'bg-gray-400' : 'bg-[#B9FF66] hover:bg-[#A1E554]'}`}
+                onClick={handleSubmit}  
                 disabled={percentageError || exceedError}
               >
                 Guardar Gasto
@@ -253,6 +240,15 @@ const SplitBill = () => {
         </div>
         <Footer />
       </motion.div>
+      {showModal && (
+        <SplitBillModal
+          message={{
+            title: '¡Gasto guardado con éxito!',
+            body: `ID de transacción: ${transactionId}`,
+          }}
+          onClose={handleModalClose}
+        />
+      )}
     </>
   );
 };

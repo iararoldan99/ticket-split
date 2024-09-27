@@ -13,11 +13,11 @@ const ProgressBar = ({ totalBudget, currentSpent, progress, isExceeded }) => {
         />
         
         <div className="absolute top-0 left-4 h-full text-white flex items-center font-semibold text-sm">
-          {progress.toFixed(2)}% {/* Muestra el porcentaje */}
+          {progress.toFixed(2)}% 
         </div>
         
         <div className="absolute top-0 right-4 h-full text-gray-800 flex items-center font-semibold text-sm">
-          ${currentSpent.toFixed(2)} {/* Muestra el gasto total */}
+          ${currentSpent.toFixed(2)} 
         </div>
       </div>
     </div>
