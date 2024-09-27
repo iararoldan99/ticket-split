@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'; 
 
 const initialState = {
   projects: [
@@ -35,7 +35,7 @@ const projectSlice = createSlice({
       if (project) {
         const newExpense = {
           ...expense,
-          id: uuidv4(),
+          id: uuidv4(), 
           date: new Date().toISOString()
         };
         project.movements.push(newExpense);
@@ -45,7 +45,7 @@ const projectSlice = createSlice({
       const { projectId, loggedInUser } = action.payload;
       const project = state.projects.find(p => p.id === projectId);
       if (project && !project.members.some(member => member.username === loggedInUser.username)) {
-        project.members.push(loggedInUser);
+        project.members.push(loggedInUser); 
       }
     }
   }
