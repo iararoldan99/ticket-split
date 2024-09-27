@@ -54,7 +54,7 @@ const NavbarDashboard = () => {
 
         <div className={`flex-col md:flex-row items-center space-x-6 hidden md:flex`}>
           <Link to="/dashboard" className="text-gray-500 hover:text-black font-bold">Inicio</Link> 
-          <Link to="/calcular-gastos" className="text-gray-500 hover:text-black">Calcular gastos</Link>
+          <Link to="/dividir-gastos" className="text-gray-500 hover:text-black">Dividir gastos</Link>
           
           <Link to="/viewProjects" className="text-gray-500 hover:text-black">Proyectos</Link>
           
@@ -97,7 +97,7 @@ const NavbarDashboard = () => {
           className="md:hidden bg-white py-2"
         >
           <Link to="/dashboard" className="block px-4 py-2 text-gray-500 hover:text-black font-bold">Inicio</Link> 
-          <Link to="/calcular-gastos" className="block px-4 py-2 text-gray-500 hover:text-black">Calcular gastos</Link>
+          <Link to="/dividir-gastos" className="block px-4 py-2 text-gray-500 hover:text-black">Calcular gastos</Link>
           
           <Link to="/viewProjects" className="block px-4 py-2 text-gray-500 hover:text-black">Proyectos</Link>
           
