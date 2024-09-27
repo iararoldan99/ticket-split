@@ -26,14 +26,15 @@ const SessionsPage = () => {
   return (
     <>
       <NavbarDashboard />
+      
       <div className="min-h-screen flex flex-col justify-between bg-white">
-        <div className="w-full flex flex-col lg:flex-row mt-10 px-6 lg:px-8 space-y-10 lg:space-y-0 lg:ml-40">
-          <div className="lg:w-1/4">
+        <div className="flex flex-col lg:flex-row mt-10 px-4 lg:px-8 space-y-10 lg:space-y-0 lg:ml-40 lg:mr-40">
+          <div className="lg:w-1/4 w-full lg:pr-8">
             <UserHeader userName="Agus" sectionName="Sesiones" />
             <SidebarNavigation />
           </div>
 
-          <div className="w-full lg:w-3/4 p-8 lg:mt-12 lg:ml-10">
+          <div className="w-full lg:w-3/4 p-6 lg:p-8 bg-gray-50 rounded-lg shadow-sm">
             <h2 className="text-xl font-bold mb-6 text-black">Sesiones activas</h2>
             <p className="text-gray-600 mb-6">Estas son tus sesiones activas actuales o recientes.</p>
             

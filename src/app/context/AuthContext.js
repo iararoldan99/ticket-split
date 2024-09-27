@@ -1,7 +1,6 @@
 import React, { createContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, register, logout } from '../redux/authSlice';
-
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -13,7 +12,7 @@ const AuthProvider = ({ children }) => {
     const validUser = users.find(user => user.email === email && user.password === password);
 
     if (validUser) {
-      dispatch(login(validUser));  // Despachamos la acción login
+      dispatch(login(validUser));
       return true;
     } else {
       return false;
