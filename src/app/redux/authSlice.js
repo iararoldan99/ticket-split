@@ -12,6 +12,7 @@ const authSlice = createSlice({
       state.user = {
         ...action.payload,
         proyectos: action.payload.proyectos || [],
+        movements: action.payload.movements || [],
       };
       localStorage.setItem('user', JSON.stringify(state.user));
     },
@@ -23,6 +24,7 @@ const authSlice = createSlice({
       state.user = {
         ...action.payload,
         proyectos: [],
+        movements: [],
       };
       localStorage.setItem('user', JSON.stringify(state.user));
     },
@@ -32,20 +34,15 @@ const authSlice = createSlice({
         state.user = JSON.parse(storedUser);
       }
     },
-    addProjectToUser: (state, action) => {
-      const newProject = action.payload;
+    addMovementToUser: (state, action) => {
       if (state.user) {
-        state.user.proyectos.push(newProject);
+        state.user.movements.push(action.payload);
         localStorage.setItem('user', JSON.stringify(state.user));
       }
     },
-    updateUserProjectsInLocalStorage: (state) => {
-      if (state.user) {
-        localStorage.setItem('user', JSON.stringify(state.user));
-      }
-    }
   },
 });
 
-export const { login, logout, register, loadUserFromLocalStorage, addProjectToUser, updateUserProjectsInLocalStorage } = authSlice.actions;
+export const { login, logout, register, loadUserFromLocalStorage, addMovementToUser } = authSlice.actions;
+
 export default authSlice.reducer;

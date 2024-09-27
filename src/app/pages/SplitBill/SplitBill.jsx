@@ -7,7 +7,9 @@ import Footer from '../../layout/Footer/Footer';
 import ProjectSelector from '../../components/splitBill/ProjectSelector';
 import AddExpense from '../../components/splitBill/AddExpense';
 import ExpenseMethodSelector from '../../components/splitBill/ExpenseMethodSelector';
+import SplitBillModal from '../../components/splitBill/SplitBillModal';
 import shareImage from '../../assets/img/share.svg';
+import { v4 as uuidv4 } from 'uuid';
 import { motion } from 'framer-motion';
 
 const pageTransition = {
@@ -32,6 +34,8 @@ const SplitBill = () => {
   const [percentageError, setPercentageError] = useState(false);
   const [totalPercentage, setTotalPercentage] = useState(0);
   const [exceedError, setExceedError] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [transactionId, setTransactionId] = useState('');
 
   const handleSplitMethodChange = (method) => {
     setSplitMethod(method);
@@ -55,25 +59,44 @@ const SplitBill = () => {
 
   const handleSelectProject = (projectId) => {
     const selected = projects.find((proj) => proj.id === parseInt(projectId));
-
     if (selected) {
-      const isUserInProject = selected.members.some(member => member.username === user.username);
-
-      // Si el usuario no está en el proyecto, añadirlo
+      const isUserInProject = selected.members.includes(user.username);
       if (!isUserInProject) {
         const updatedProject = {
           ...selected,
-          members: [...selected.members, { username: user.username, email: user.email }],
+          members: [...selected.members, user.username],
         };
         setSelectedProject(updatedProject);
       } else {
-        setSelectedProject(selected);  // Si ya está en el proyecto, solo seleccionarlo
+        setSelectedProject(selected);
       }
     }
   };
 
+  const handleCreateProject = () => {
+    navigate('/projectCreate');
+  };
+
   const handleSubmit = () => {
-    if (!selectedProject || totalPercentage !== 100 || exceedError) return;
+    console.log("HandleSubmit ejecutado");
+
+    if (!selectedProject) {
+      console.log("No hay proyecto seleccionado");
+      return;
+    }
+
+    if (splitMethod === 'percentage') {
+      if (totalPercentage !== 100) {
+        console.log("Error: El porcentaje total no es 100%");
+        return;
+      }
+      if (exceedError) {
+        console.log("Error: El porcentaje excede el 100%");
+        return;
+      }
+    }
+
+    const newTransactionId = uuidv4();
 
     let splitDetails;
     if (splitMethod === 'equitative') {
@@ -91,6 +114,7 @@ const SplitBill = () => {
     }
 
     const expenseData = {
+      id: newTransactionId,
       project: selectedProject,
       description,
       amount,
@@ -98,15 +122,31 @@ const SplitBill = () => {
       splitDetails,
     };
 
+    console.log('Datos del gasto:', expenseData);
+
     dispatch(addExpense({ projectId: selectedProject.id, expense: expenseData }));
+
+    setTransactionId(newTransactionId);
+    setShowModal(true);
   };
 
-  const handleCreateProject = () => {
-    navigate('/projectCreate');
+  const handleModalClose = () => {
+    setShowModal(false);
+    navigate('/dashboard');
   };
 
   return (
     <>
+      {showModal && (
+        <SplitBillModal
+          message={{
+            title: '¡Gasto guardado con éxito!',
+            body: `ID de transacción: ${transactionId}`,
+          }}
+          onClose={handleModalClose}
+        />
+      )}
+
       <motion.div
         initial="initial"
         animate="animate"
@@ -115,8 +155,8 @@ const SplitBill = () => {
         transition={pageTransition.transition}
       >
         <NavbarDashboard />
-        <div className="min-h-screen flex justify-center items-center bg-gray-50 px-4 sm:px-6 lg:px-8">
-          <div className="w-full max-w-6xl bg-white shadow-lg rounded-lg p-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="min-h-screen bg-white flex justify-center items-center px-4 sm:px-6 lg:px-8">
+          <div className="w-full max-w-6xl p-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="w-full p-4">
               <h1 className="text-3xl font-bold text-center mb-4">Dividir Gastos</h1>
               <p className="text-center text-gray-600 mb-8">Elegí un proyecto y dividí los gastos</p>
@@ -148,9 +188,9 @@ const SplitBill = () => {
                     División Equitativa entre los {selectedProject.members.length} miembros
                   </h3>
                   <ul className="list-disc pl-5">
-                    {selectedProject.members.map((member, index) => (
-                      <li key={index} className="text-gray-700">
-                        {member.username}: ${(amount / selectedProject.members.length).toFixed(2)}
+                    {selectedProject.members.map((member) => (
+                      <li key={member} className="text-gray-700">
+                        {member}: ${(amount / selectedProject.members.length).toFixed(2)}
                       </li>
                     ))}
                   </ul>
@@ -167,8 +207,9 @@ const SplitBill = () => {
                         type="text"
                         value={percentages[index]}
                         onChange={(e) => handlePercentageChange(index, e.target.value)}
-                        className={`w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary ${exceedError ? 'border-red-500' : ''
-                          }`}
+                        className={`w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary ${
+                          exceedError ? 'border-red-500' : ''
+                        }`}
                         placeholder="Ej: 50%"
                         disabled={totalPercentage >= 100 && percentages[index] === 0}
                       />
@@ -191,8 +232,9 @@ const SplitBill = () => {
               )}
 
               <button
-                className={`mt-8 w-full p-3 rounded-lg font-semibold text-white ${percentageError || exceedError ? 'bg-gray-400' : 'bg-green-500 hover:bg-green-600'
-                  }`}
+                className={`mt-8 w-full p-3 rounded-lg font-semibold text-white ${
+                  percentageError || exceedError ? 'bg-gray-400' : 'bg-green-500 hover:bg-green-600'
+                }`}
                 onClick={handleSubmit}
                 disabled={percentageError || exceedError}
               >

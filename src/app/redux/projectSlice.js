@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
   projects: [
@@ -24,26 +25,31 @@ const initialState = {
 };
 
 const projectSlice = createSlice({
-    name: 'projects',
-    initialState,
-    reducers: {
-      addExpense: (state, action) => {
-        const { projectId, expense } = action.payload;
-        const project = state.projects.find(p => p.id === projectId);
-        if (project) {
-          project.movements.push(expense);
-        }
-      },
-      addLoggedInUserToProject: (state, action) => {
-        const { projectId, loggedInUser } = action.payload;
-        const project = state.projects.find(p => p.id === projectId);
-        if (project && !project.members.some(member => member.username === loggedInUser.username)) {
-          project.members.push(loggedInUser); 
-        }
+  name: 'projects',
+  initialState,
+  reducers: {
+    addExpense: (state, action) => {
+      const { projectId, expense } = action.payload;
+      const project = state.projects.find(p => p.id === projectId);
+
+      if (project) {
+        const newExpense = {
+          ...expense,
+          id: uuidv4(),
+          date: new Date().toISOString()
+        };
+        project.movements.push(newExpense);
+      }
+    },
+    addLoggedInUserToProject: (state, action) => {
+      const { projectId, loggedInUser } = action.payload;
+      const project = state.projects.find(p => p.id === projectId);
+      if (project && !project.members.some(member => member.username === loggedInUser.username)) {
+        project.members.push(loggedInUser);
       }
     }
-  });
+  }
+});
 
 export const { addExpense, addLoggedInUserToProject } = projectSlice.actions;
-
 export default projectSlice.reducer;
