@@ -108,13 +108,13 @@ const NavbarDashboard = () => {
                   className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:shadow-md w-full text-left"
                 >
                   Mi cuenta
-                </Link>
+                </button>
                 <Link 
                   to="/edit-profile" 
                   className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:shadow-md"
                 >
                   Configuración
-                </button>
+                </Link>
                 <button 
                   onClick={() => handleNavigation('/logout')}
                   className="block px-4 py-2 text-red-500 hover:bg-gray-100 hover:shadow-md w-full text-left"
