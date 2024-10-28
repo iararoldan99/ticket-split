@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';  
-import { login } from '../../redux/authSlice';  
+import { login } from '../../store/auth/authSlice';  
 import mobileAppImage from '../../assets/img/Group 1948759423 (1).svg';
 import playStoreImg from '../../assets/img/App Store.svg';
 import appImg from '../../assets/img/Google Play.svg';
