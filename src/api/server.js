@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const { connectDB } = require('./db.js');
 const express = require('express');
 const cors = require('cors');
@@ -15,7 +17,6 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-// Conectar a la base de datos
 connectDB();
 
 app.listen(PORT, () => {
