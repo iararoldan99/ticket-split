@@ -1,5 +1,5 @@
 <p align="left">
-   <img src="./src/app/assets/img/Icon.svg" width="30"/>
+   <img src="./src/client/assets/img/Icon.svg" width="30"/>
 </p>
 
 # Ticket Split
