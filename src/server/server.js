@@ -13,7 +13,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(authRoutes);
+
+app.use('/api', authRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'Servidor de Express funcionando' });
