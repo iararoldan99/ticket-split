@@ -5,7 +5,7 @@ import Footer from '../../layout/Footer/Footer';
 import ProgressBar from '../../components/dashboard/ProgressBar';
 import CargarSaldoModal from '../../components/dashboard/CargarSaldoModal';
 import AdditionalOptions from '../../components/dashboard/AdditionalOptions';
-import { setMonthlyBudget } from '../../redux/authSlice';
+import { setMonthlyBudget } from '../../store/user/userSlice';
 import UltimosMovimientos from '../../components/dashboard/UltimosMovimientos';
 
 const Dashboard = () => {

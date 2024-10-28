@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setMonthlyBudget } from '../../redux/authSlice';
+import { setMonthlyBudget } from '../../store/user/userSlice';
 import { motion } from 'framer-motion';
 
 const CargarSaldoModal = ({ isOpen, onClose }) => {

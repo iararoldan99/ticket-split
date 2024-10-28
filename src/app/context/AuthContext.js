@@ -1,6 +1,6 @@
 import React, { createContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, register, logout } from '../redux/authSlice';
+import { login, register, logout } from '../store/auth/authSlice';
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {

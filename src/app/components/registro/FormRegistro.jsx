@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { register } from '../../redux/authSlice';
+import { register } from '../../store/auth/authSlice';
 
 const FormRegistro = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);

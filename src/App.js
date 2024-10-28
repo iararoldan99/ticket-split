@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Provider } from 'react-redux'; 
 import { AnimatePresence } from 'framer-motion';
-import { store } from './app/redux/store'; 
+import { store } from './app/store/store'; 
 import AuthProvider from './app/context/AuthContext'; 
 import Landing from './app/pages/Landing/Landing';
 import Login from './app/pages/Login/Login';
@@ -22,6 +22,7 @@ import UpdatePassword from './app/pages/UpdatePassword/UpdatePassword';
 import SessionsPage from './app/pages/Sessions/SessionsPage';  
 import DeleteAccountPage from './app/pages/DeleteAccount/DeleteAccountPage';
 import AccountDeletedPage from './app/pages/AccountDeleted/AccountDeletedPage'; 
+import { ROUTES } from './app/constants/constants';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -29,79 +30,79 @@ function AnimatedRoutes() {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/registro" element={<Registro />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path={ROUTES.APP_ROUTE} element={<Landing />} />
+        <Route path={ROUTES.LOGIN_ROUTE} element={<Login />} />
+        <Route path={ROUTES.REGISTER_ROUTE} element={<Registro />} />
+        <Route path={ROUTES.FORGOT_PASSWORD_ROUTE} element={<ForgotPassword />} />
+        <Route path={ROUTES.RESET_PASSWORD_ROUTE} element={<ResetPassword />} />
 
-        <Route path="/dashboard" element={
+        <Route path={ROUTES.DASHBOARD_ROUTE} element={
           <PrivateRoute>
             <Dashboard />
           </PrivateRoute>
         } /> 
 
-        <Route path="/dividir-gastos" element={
+        <Route path={ROUTES.SPLIT_BILL_ROUTE} element={
           <PrivateRoute>
             <SplitBill />
           </PrivateRoute>
         } />
 
-        <Route path="/viewProjects" element={
+        <Route path={ROUTES.VIEW_PROJECTS_ROUTE} element={
           <PrivateRoute>
             <ViewProjects />
           </PrivateRoute>
         } />
 
-        <Route path="/projectCreate" element={
+        <Route path={ROUTES.CREATE_PROJECTS_ROUTE} element={
           <PrivateRoute>
             <ProjectCreate />
           </PrivateRoute>
         } />
 
-        <Route path="/projectDetails/:projectName" element={
+        <Route path={`${ROUTES.PROJECT_DETAILS_ROUTE}/:projectName`} element={
           <PrivateRoute>
             <ProjectDetails />
           </PrivateRoute>
         } />
 
-        <Route path="/my-account" element={
+        <Route path={ROUTES.MY_ACCOUNT_ROUTE} element={
           <PrivateRoute>
             <MyAccount />
           </PrivateRoute>
         } />
 
-        <Route path="/my-account/notifications" element={
+        <Route path={ROUTES.NOTIFICATIONS_ROUTE} element={
           <PrivateRoute>
             <Notifications />
           </PrivateRoute>
         } />
 
-        <Route path="/edit-profile" element={
+        <Route path={ROUTES.EDIT_PROFILE_ROUTE} element={
           <PrivateRoute>
             <EditProfile />
           </PrivateRoute>
         } />
 
-        <Route path="/update-password" element={
+        <Route path={ROUTES.UPDATE_PASSWORD_ROUTE} element={
           <PrivateRoute>
            <UpdatePassword />
           </PrivateRoute>
         } />
-        <Route path="/my-account/sessions" element={
+        
+        <Route path={ROUTES.SESSIONS_ROUTE} element={
           <PrivateRoute>
             <SessionsPage />
           </PrivateRoute>
         } />
-        <Route path="/my-account/delete-account" element={
+        
+        <Route path={ROUTES.DELETE_ACCOUNT_ROUTE} element={
           <PrivateRoute>
             <DeleteAccountPage />
           </PrivateRoute>
         } />
         
-        <Route path="/account-deleted" element={<AccountDeletedPage />} />
-
-
+        <Route path={ROUTES.ACCOUNT_DELETED_ROUTE} element={<AccountDeletedPage />} />
       </Routes>
     </AnimatePresence>
   );

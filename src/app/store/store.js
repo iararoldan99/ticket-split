@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import projectsReducer from './projectSlice';
-import authReducer, { loadUserFromLocalStorage } from './authSlice'; 
+import userReducer from '../store/user/userSlice';
+import authReducer, { loadUserFromLocalStorage } from '../store/auth/authSlice'; 
 
 export const store = configureStore({
   reducer: {
-    projects: projectsReducer,
     auth: authReducer, 
+    user: userReducer,
   },
 });
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addExpense } from '../../redux/projectSlice';
+import { addExpense } from '../../store/user/userSlice';
 import NavbarDashboard from '../../layout/Navbar/NavbarDashboard';
 import Footer from '../../layout/Footer/Footer';
 import ProjectSelector from '../../components/splitBill/ProjectSelector';
