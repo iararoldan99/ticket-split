@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2131c591-430e-4e94-9b7e-0cdc5ef3d254" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/server/libs/jwt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/middlewares/auth.middleware.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/middlewares/validator.middleware.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/schemas/auth.schema.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/controllers/auth.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/controllers/auth.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/libs/jwt.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/libs/jwt.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/routes/auth.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/routes/auth.routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +43,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Node.js.auth.controller.js.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "backend",
     "node.js.detected.package.eslint": "true",
@@ -74,7 +81,7 @@
       <option name="presentableId" value="Default" />
       <updated>1730126605844</updated>
       <workItem from="1730126607605" duration="294000" />
-      <workItem from="1730126922372" duration="6040000" />
+      <workItem from="1730126922372" duration="12995000" />
     </task>
     <servers />
   </component>
@@ -91,5 +98,17 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/server/middlewares/auth.middleware.js</url>
+          <line>6</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
