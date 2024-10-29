@@ -18,7 +18,7 @@ app.use(cors({
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use('/api', authRoutes);
+app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'Servidor de Express funcionando' });
