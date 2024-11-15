@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import heroImage from '../../assets/img/Illustration.svg';
+import { motion } from 'framer-motion';  
 
 const ProjectForm = ({ initialProjectName = '', initialDescription = '', members = [] }) => {
   const [projectName, setProjectName] = useState(initialProjectName); 
@@ -27,7 +28,13 @@ const ProjectForm = ({ initialProjectName = '', initialDescription = '', members
 
   return (
     <div className="relative w-full lg:w-[150%] mx-auto"> 
-      <form className="space-y-6 w-full lg:w-[70%]" onSubmit={handleSave}> 
+      <motion.form 
+        className="space-y-6 w-full lg:w-[70%]" 
+        onSubmit={handleSave}
+        initial={{ opacity: 0, y: 20 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 1 }}  
+      >
         <div>
           <label className="block text-sm font-medium text-black" htmlFor="projectName">
             Nombre
@@ -84,14 +91,20 @@ const ProjectForm = ({ initialProjectName = '', initialDescription = '', members
 
         <div className="grid grid-cols-3 gap-4">
           {projectMembers.map((member, index) => (
-            <div key={index} className="text-center">
+            <motion.div 
+              key={index} 
+              className="text-center" 
+              initial={{ opacity: 0, y: 10 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 1 }}  
+            >
               <img
                 src={member.image || heroImage}
                 alt={member.name}
                 className="w-16 h-16 rounded-full mx-auto"
               />
               <p className="mt-2">{member.name}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -122,14 +135,24 @@ const ProjectForm = ({ initialProjectName = '', initialDescription = '', members
             </button>
           )}
         </div>
-      </form>
+      </motion.form>
 
       <div className="relative lg:absolute top-0 right-0 flex flex-col items-center mt-10 lg:mt-0 lg:right-[-5px]">
-        <p className="text-sm font-bold text-black mb-2">Ícono</p>
-        <img
+        <motion.p 
+          className="text-sm font-bold text-black mb-2"
+          initial={{ opacity: 0, y: 10 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 1 }}  
+        >
+          Ícono
+        </motion.p>
+        <motion.img
           src={heroImage} 
           alt="Ícono del proyecto"
           className="w-36 h-36 rounded-full object-cover mb-4"
+          initial={{ opacity: 0, y: 10 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 1 }}  
         />
         <button className="bg-[#B9FF66] text-black font-medium py-2 px-4 rounded-md shadow-sm hover:bg-[#a3e65b] transition duration-300">
           Editar
@@ -140,3 +163,4 @@ const ProjectForm = ({ initialProjectName = '', initialDescription = '', members
 };
 
 export default ProjectForm;
+

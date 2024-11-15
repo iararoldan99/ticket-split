@@ -1,6 +1,9 @@
+// src/app/context/AuthContext.js
+
 import React, { createContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, register, logout } from '../redux/authSlice';
+
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -57,4 +60,5 @@ const AuthProvider = ({ children }) => {
   );
 };
 
+// Esta es la corrección: exportación por defecto
 export default AuthProvider;

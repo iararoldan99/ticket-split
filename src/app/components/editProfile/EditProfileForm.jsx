@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'; 
 import { motion } from 'framer-motion';
+import { updateUser } from '../../redux/authSlice'; 
 import profileIcon from '../../assets/img/UserIcon.svg'; 
 
 const EditProfileForm = () => {
-  const [name, setName] = useState('Agus'); 
-  const [bio, setBio] = useState('25. Me gustan los gatos y el café');
-  const [location, setLocation] = useState('Caballito, CABA.'); 
+  const { user } = useSelector(state => state.auth); 
+  const dispatch = useDispatch();
+
+  const [name, setName] = useState(user.username || ''); 
+  const [bio, setBio] = useState(''); 
+  const [location, setLocation] = useState('');  
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    setName(user.username);  
+  }, [user]); 
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -14,8 +23,9 @@ const EditProfileForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Datos del perfil editado:", { name, bio, location });
+    dispatch(updateUser({ username: name }));
     setIsEditing(false);  
+    console.log("Datos del perfil editado:", { name });
   };
 
   return (
@@ -36,9 +46,9 @@ const EditProfileForm = () => {
             name="name"
             className="mt-1 block lg:w-2/3 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-black focus:ring-0 sm:text-sm"
             placeholder="Nombre completo"
-            value={name}
+            value={name}  
             onChange={(e) => setName(e.target.value)}
-            readOnly={!isEditing}
+            readOnly={!isEditing} 
             whileFocus={{ scale: 1.01 }}  
             transition={{ type: 'spring', stiffness: 300 }}
           />

@@ -23,14 +23,15 @@ const NotificationsForm = () => {
     <motion.form 
       className="space-y-6 w-full max-w-xl mx-auto px-0 lg:px-0 mt-20 ml-4" 
       onSubmit={handleSubmit}
-      initial={{ opacity: 0, y: 20 }}  // Comienza fuera de la pantalla
-      animate={{ opacity: 1, y: 0 }}  // Se desplaza hacia su posición
-      transition={{ duration: 0.8, ease: "easeOut" }}  // Suave animación de aparición
+      initial={{ opacity: 0, y: 20 }} 
+      animate={{ opacity: 1, y: 0 }}  
+      transition={{ duration: 0.8, ease: "easeOut" }}  
     >
-      <h2 className="text-xl font-bold mb-2 text-black">Notificaciones</h2>
-      <p className="text-gray-600 mb-4">Administrá las notificaciones que recibís</p>
+      <h2 className="text-xl font-bold text-black" style={{ marginBottom: '2px' }}>Notificaciones</h2>
+      <p className="text-gray-600" style={{ marginBottom: '2px' }}>Administrá las notificaciones que recibís</p>
 
-      {/* Notificaciones con animaciones */}
+
+
       {[
         { label: "Saldos pendientes", state: pendingBalance, setState: setPendingBalance },
         { label: "Nuevos proyectos", state: newProjects, setState: setNewProjects },
@@ -41,7 +42,7 @@ const NotificationsForm = () => {
         <motion.div
           key={index}
           className="bg-gray-100 rounded-lg p-4 mb-4 flex items-center justify-between"
-          whileHover={{ scale: 1.02 }}  // Efecto hover
+          whileHover={{ scale: 1.02 }}  
           transition={{ duration: 0.3 }}
         >
           <label className="block text-md text-gray-800">{item.label}</label>
@@ -58,18 +59,17 @@ const NotificationsForm = () => {
         </motion.div>
       ))}
 
-      {/* Botón con animación */}
       <motion.div 
         className="flex justify-end mt-6"
-        initial={{ opacity: 0, y: 10 }}  // Aparece suavemente desde abajo
+        initial={{ opacity: 0, y: 10 }}  
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <motion.button
           type="submit"
           className="bg-[#B9FF66] text-black py-2 px-6 rounded-lg shadow-sm hover:bg-[#a3e65b] transition duration-300 font-semibold"
-          whileHover={{ scale: 1.05 }}  // Botón se agranda ligeramente al pasar el mouse
-          whileTap={{ scale: 0.95 }}    // Botón se achica al hacer click
+          whileHover={{ scale: 1.05 }}  
+          whileTap={{ scale: 0.95 }}    
         >
           Guardar cambios
         </motion.button>
