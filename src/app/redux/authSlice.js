@@ -127,6 +127,13 @@ const authSlice = createSlice({
             state.user.monthlyBudget += action.payload;  
             localStorage.setItem('user', JSON.stringify(state.user));  
         },
+        updateUser: (state, action) => {
+            state.user = {
+                ...state.user,
+                ...action.payload,  
+            };
+            localStorage.setItem('user', JSON.stringify(state.user));  
+        },
     },
 });
 
@@ -138,6 +145,7 @@ export const {
     addMovementToUser,
     setMonthlyBudget,
     updateSaldo,
+    updateUser,  
 } = authSlice.actions;
 
 export default authSlice.reducer;
