@@ -34,15 +34,8 @@ const SidebarNavigation = () => {
       </Link>
 
       <Link 
-        to="/my-account/notifications" 
-        className="block text-gray-500 mb-4 whitespace-nowrap"
-      >
-        Notificaciones
-      </Link>
-
-      <Link 
         to="/my-account/sessions" 
-        className="block text-gray-500 mb-4 whitespace-nowrap"
+        className={`block text-gray-500 mb-4 whitespace-nowrap ${location.pathname === '/my-account/sessions' ? 'text-black font-bold' : ''}`}
       >
         Sesiones
       </Link>
@@ -51,7 +44,7 @@ const SidebarNavigation = () => {
 
       <Link 
         to="/my-account/delete-account" 
-        className="block text-red-500 hover:underline whitespace-nowrap"
+        className={`block text-red-500 hover:underline whitespace-nowrap ${location.pathname === '/my-account/delete-account' ? 'text-black font-bold' : ''}`}
       >
         Eliminar cuenta
       </Link>

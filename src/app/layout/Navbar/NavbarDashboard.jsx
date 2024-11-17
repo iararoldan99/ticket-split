@@ -116,7 +116,7 @@ const NavbarDashboard = () => {
                   Configuración
                 </Link>
                 <button 
-                  onClick={() => handleNavigation('/logout')}
+                  onClick={() => handleNavigation('/')}
                   className="block px-4 py-2 text-red-500 hover:bg-gray-100 hover:shadow-md w-full text-left"
                 >
                   Cerrar sesión

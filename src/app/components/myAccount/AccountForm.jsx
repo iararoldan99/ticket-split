@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion'; 
+import { useDispatch } from 'react-redux';
+import { updateUser } from '../../redux/authSlice'; 
+import { useSelector} from 'react-redux'; 
 
 const AccountForm = () => {
-  const [username, setUsername] = useState('aguslopez99');
-  const [email, setEmail] = useState('aguslopez99@gmail.com');
-  const [isEditing, setIsEditing] = useState(false);  
+  const dispatch = useDispatch();
+  const { user } = useSelector(state => state.auth); 
+  const [username, setUsername] = useState(user.username);  
+  const [email, setEmail] = useState(user.email);  
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleEdit = () => {
     setIsEditing(true);  
@@ -13,6 +18,8 @@ const AccountForm = () => {
   const handleSave = (e) => {
     e.preventDefault();
     setIsEditing(false);  
+
+    dispatch(updateUser({ username, email }));  
     console.log('Datos guardados:', { username, email });
   };
 
