@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setMonthlyBudget } from '../../store/user/userSlice';
+import { setMonthlyBudget } from '../../store/user/userSlice.js';
 import { motion } from 'framer-motion';
 
 const CargarSaldoModal = ({ isOpen, onClose }) => {
@@ -19,9 +19,9 @@ const CargarSaldoModal = ({ isOpen, onClose }) => {
     <>
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <motion.div 
-            initial={{ opacity: 0, y: -50 }} 
-            animate={{ opacity: 1, y: 0 }} 
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
             className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full"
           >
             <h2 className="text-2xl font-bold mb-4">Cargar Saldo</h2>

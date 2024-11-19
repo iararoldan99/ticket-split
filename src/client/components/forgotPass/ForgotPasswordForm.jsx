@@ -22,7 +22,7 @@ const ForgotPasswordForm = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
-    navigate('/reset-password');
+    navigate('/nueva-contrasena');
   };
 
   return (

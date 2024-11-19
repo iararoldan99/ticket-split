@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid'; 
 
 const initialState = {
     authData: {
@@ -15,45 +14,24 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        login: (state, action) => {
-            state.authData = {
-                ...action.payload,
-            };
-            localStorage.setItem('authData', JSON.stringify(state.authData));
-        },
-        logout: (state) => {
-            state.authData = {
-                email: '',
-                username: '',
-                password: '',
-            };
-            localStorage.removeItem('user');
-        },
-        register: (state, action) => {
-            state.authData = {
-                ...action.payload,
-            };
-            localStorage.setItem('authData', JSON.stringify(state.authData));
-        },
-        loadUserFromLocalStorage: (state) => {
-            const storedUser = localStorage.getItem('authData');
-            if (storedUser) {
-                const parsedUser = JSON.parse(storedUser);
-
-                state.authData = {
-                    ...initialState.user,
-                    ...parsedUser,
-                };
-            }
-        },
+      setUserData: (state, action) => {
+          state.authData = {
+              ...action.payload,
+          }
+      },
+      setAuthenticated: (state, action) => {
+          state.authData.isAuthenticated = action.payload;
+      },
+      getUserData: (state, action) => {
+          return state.authData;
+      },
     },
 });
 
 export const {
-    login,
-    logout,
-    register,
-    loadUserFromLocalStorage,
+  setUserData,
+  getUserData,
+  setAuthenticated,
 } = authSlice.actions;
 
 export default authSlice.reducer;

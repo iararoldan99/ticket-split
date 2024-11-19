@@ -1,35 +1,36 @@
 import React from 'react';
-import { useSelector } from 'react-redux'; 
-import NavbarDashboard from '../../layout/Navbar/NavbarDashboard';  
-import Footer from '../../layout/Footer/Footer';  
-import SidebarNavigation from '../../components/myAccount/SidebarNavigation'; 
-import HeaderIcon from '../../components/myAccount/UserHeader';  
+import {useSelector} from 'react-redux';
+import NavbarDashboard from '../../layout/Navbar/NavbarDashboard';
+import Footer from '../../layout/Footer/Footer';
+import SidebarNavigation from '../../components/myAccount/SidebarNavigation';
+import HeaderIcon from '../../components/myAccount/UserHeader';
 import UpdatePasswordForm from '../../components/updatePassword/UpdatePasswordForm';
+import {useAuth} from "../../context/AuthContext.js";
 
 const UpdatePassword = () => {
-  const { username } = useSelector((state) => state.auth.user);
+    const {authInfo} = useAuth();
 
-  return (
-    <>
-      <NavbarDashboard />
+    return (
+        <>
+            <NavbarDashboard/>
 
-      <div className="min-h-screen flex flex-col justify-between bg-white">
-        <div className="w-full flex flex-col lg:flex-row mt-10 px-6 lg:px-8 space-y-10 lg:space-y-0 lg:ml-40">
-          
-          <div>
-            <HeaderIcon userName={username} sectionName="Contraseña" />
-            <SidebarNavigation />
-          </div>
+            <div className="min-h-screen flex flex-col justify-between bg-white">
+                <div className="w-full flex flex-col lg:flex-row mt-10 px-6 lg:px-8 space-y-10 lg:space-y-0 lg:ml-40">
 
-          <div className="w-full lg:w-3/4 p-8 mt-16">
-            <UpdatePasswordForm />
-          </div>
-        </div>
-      </div>
+                    <div>
+                        <HeaderIcon userName={authInfo?.username} sectionName="Contraseña"/>
+                        <SidebarNavigation/>
+                    </div>
 
-      <Footer />
-    </>
-  );
+                    <div className="w-full lg:w-3/4 p-8 mt-16">
+                        <UpdatePasswordForm/>
+                    </div>
+                </div>
+            </div>
+
+            <Footer/>
+        </>
+    );
 };
 
 export default UpdatePassword;

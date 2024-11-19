@@ -1,4 +1,4 @@
-import User from "../models/user.model.js";
+import Auth from "../models/auth.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { TOKEN_SECRET } from "../config.js";
@@ -8,16 +8,16 @@ export const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    const userFound = await User.findOne({ email });
+    const userFound = await Auth.findOne({ email });
 
     if (userFound)
       return res.status(400).json({
-        message: ["The email is already in use"],
+        message: ["Este email ya se encuentra registrado"],
       });
 
     const passwordHash = await bcrypt.hash(password, 10);
 
-    const newUser = new User({
+    const newUser = new Auth({
       username,
       email,
       password: passwordHash,
@@ -30,7 +30,6 @@ export const register = async (req, res) => {
     });
 
     res.cookie("token", token, {
-      httpOnly: process.env.NODE_ENV !== "development",
       secure: true,
       sameSite: "none",
     });
@@ -48,17 +47,17 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const userFound = await User.findOne({ email });
+    const userFound = await Auth.findOne({ email });
 
     if (!userFound)
       return res.status(400).json({
-        message: ["The email does not exist"],
+        message: ["No se encontró ninguna cuenta registrada con este email"],
       });
 
     const isMatch = await bcrypt.compare(password, userFound.password);
     if (!isMatch) {
       return res.status(400).json({
-        message: ["The password is incorrect"],
+        message: ["Contraseña incorrecta"],
       });
     }
 
@@ -68,11 +67,10 @@ export const login = async (req, res) => {
     });
 
     res.cookie("token", token, {
-      httpOnly: process.env.NODE_ENV !== "development",
       secure: true,
       sameSite: "none",
     });
-
+    console.log(res)
     res.json({
       id: userFound._id,
       username: userFound.username,
@@ -84,15 +82,16 @@ export const login = async (req, res) => {
 };
 
 export const verifyToken = async (req, res) => {
+  console.log('estoy aca')
   const { token } = req.cookies;
   if (!token) return res.status(401).json({ message: "No estás autenticado" });
 
   jwt.verify(token, TOKEN_SECRET, async (error, user) => {
     if (error) return res.sendStatus(401);
 
-    const userFound = await User.findById(user.id);
-    if (!userFound) return res.sendStatus(401);
-
+    const userFound = await Auth.findById(user.id);
+    if (!userFound) return res.sendStatus(401).json({ message: 'No se encontró el usuario'});
+    console.log(res)
     return res.json({
       id: userFound._id,
       username: userFound.username,
