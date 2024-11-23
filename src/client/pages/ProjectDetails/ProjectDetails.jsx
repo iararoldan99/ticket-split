@@ -10,10 +10,12 @@ import user3 from '../../assets/img/user3.svg';
 import user4 from '../../assets/img/user4.svg';
 import user5 from '../../assets/img/user5.svg';
 import user6 from '../../assets/img/user6.svg';
-import {useAuth} from "../../context/AuthContext.js"; //TODO: Hardcoded images
+import {useUserInfo} from "../../context/UserContext.js";
+import {useSelector} from "react-redux"; //TODO: Hardcoded images
 
 const ProjectDetails = () => {
-    const {authInfo} = useAuth();
+    const {userInfo} = useUserInfo();
+    const {user} = useSelector((state) => state.user);
     const projectData = { //TODO: Get this data from the backend
         projectName: 'Fiesta en casa',
         description: 'Cumpleaños de Fran',
@@ -34,7 +36,7 @@ const ProjectDetails = () => {
                 <div className="w-full flex flex-col lg:flex-row mt-10 px-6 lg:px-8 space-y-10 lg:space-y-0 lg:ml-40">
                     <div className="w-full lg:w-2/3 flex flex-col lg:flex-row lg:items-start items-start lg:space-x-8">
                         <div>
-                            <UserHeader userName={authInfo?.username} sectionName="Detalles del Proyecto"/>
+                            <UserHeader userName={user?.username} sectionName="Detalles del Proyecto"/>
                             <SidebarNavigation/>
                         </div>
                         <div className="w-full lg:w-3/4 p-8 mt-16">

@@ -1,51 +1,153 @@
-import User from "../models/auth.model.js";
-import jwt from "jsonwebtoken";
+// archivo: controllers/user.controller.js
+
+import * as userService from "../service/user.service.js";
 import { TOKEN_SECRET } from "../config.js";
+import jwt from "jsonwebtoken";
 
+// Registro de usuario
+export const register = async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+    const userFound = await userService.findUserByEmail(email);
+
+    if (userFound) {
+      return res.status(400).json({ message: ["Este email ya se encuentra registrado"] });
+    }
+
+    const userSaved = await userService.registerUser({ username, email, password });
+    const token = await userService.createUserToken(userSaved);
+
+    res.cookie("token", token, { secure: true, sameSite: "none" });
+    res.json({ id: userSaved._id, username: userSaved.username, email: userSaved.email });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Login de usuario
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const userFound = await userService.loginUser(email, password);
+
+    if (!userFound) {
+      return res.status(400).json({ message: ["Email o contraseña incorrectos"] });
+    }
+
+    const token = await userService.createUserToken(userFound);
+    res.cookie("token", token, { secure: true, sameSite: "none" });
+    res.json({ id: userFound._id, username: userFound.username, email: userFound.email });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Verificación de token
+export const verifyToken = async (req, res) => {
+  const { token } = req.cookies;
+  if (!token) return res.status(401).json({ message: "No estás autenticado" });
+
+  jwt.verify(token, TOKEN_SECRET, async (error, user) => {
+    if (error) return res.sendStatus(401);
+
+    const userFound = await userService.findUserById(user.id);
+    if (!userFound) return res.status(401).json({ message: 'Usuario no encontrado' });
+
+    res.json({ id: userFound._id, username: userFound.username, email: userFound.email });
+  });
+};
+
+// Logout de usuario
+export const logout = (req, res) => {
+  res.cookie("token", "", { httpOnly: true, secure: true, expires: new Date(0) });
+  res.status(200).json({ message: "Logout exitoso" });
+};
+
+// Obtener usuario por ID
 export const getUserById = async (req, res) => {
-  console.log('estoy aca')
-  const { token } = req.cookies;
-  if (!token) return res.status(401).json({ message: "No estás autenticado" });
-
-  jwt.verify(token, TOKEN_SECRET, async (error, user) => {
-    if (error) return res.sendStatus(401);
-
-    const userFound = await User.findById(user.id);
-    if (!userFound) return res.sendStatus(401).json({ message: 'No se encontró el usuario'});
-    console.log(res)
-    return res.json({
-      id: userFound._id,
-      username: userFound.username,
-      email: userFound.email,
-      name: userFound.name,
-      description: userFound.description,
-      location: userFound.location,
-    });
-  });
+  const { id } = req.params;
+  try {
+    const userFound = await userService.findUserById(id);
+    if (!userFound) return res.status(404).json({ message: "Usuario no encontrado" });
+    res.json(userFound);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
+// Actualizar usuario por ID
 export const updateUserById = async (req, res) => {
-  const { token } = req.cookies;
-  if (!token) return res.status(401).json({ message: "No estás autenticado" });
-
-  jwt.verify(token, TOKEN_SECRET, async (error, user) => {
-    if (error) return res.sendStatus(401);
-
-    const userFound = await User.findById(user.id);
-    if (!userFound) return res.sendStatus(401).json({ message: 'No se encontró el usuario'});
-    console.log(res)
-    const { username, email, name, description, location } = req.body;
-
-    if (username) userFound.username = username;
-    if (email) userFound.email = email;
-    if (name) userFound.name = name;
-    if (description) userFound.description = description;
-    if (location) userFound.location = location;
-
-    const updatedUser = await userFound.save();
-
+  const { id } = req.params;
+  try {
+    const updates = req.body;
+    const updatedUser = await userService.updateUserDetails(id, updates);
     res.json({ message: "Usuario actualizado con éxito", user: updatedUser });
-
-  });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
+// Obtener lista de usuarios con paginación
+export const getUsers = async (req, res) => {
+  const page = req.query.page || 1;
+  const limit = req.query.limit || 10;
+
+  try {
+    const users = await userService.getUsers({}, page, limit);
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Obtener usuarios por email
+export const getUsersByMail = async (req, res) => {
+  const { email } = req.params;
+  const page = req.query.page || 1;
+  const limit = req.query.limit || 10;
+  const filtro = { email };
+
+  try {
+    const users = await userService.getUsers(filtro, page, limit);
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const addFriend = async (req, res) => {
+  const { id: friendId } = req.body; // ID del amigo
+  const userId = req.user.id; // ID del usuario autenticado
+
+  try {
+    const newFriend = await userService.addFriend(userId, friendId);
+    res.status(200).json({ message: "Amigo agregado exitosamente", friend: newFriend });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+// Obtener lista de amigos
+export const getFriends = async (req, res) => {
+  const userId = req.user.id;
+
+  try {
+    const friends = await userService.getFriends(userId);
+    res.status(200).json(friends);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+// Eliminar un amigo
+export const deleteFriend = async (req, res) => {
+  const { id: friendId } = req.params;
+  const userId = req.user.id;
+
+  try {
+    await userService.deleteFriend(userId, friendId);
+    res.status(200).json({ message: "Amigo eliminado exitosamente" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};

@@ -5,7 +5,7 @@ import { updateUser } from '../../../client/store/user/userSlice.js';
 import profileIcon from '../../assets/img/UserIcon.svg';
 
 const EditProfileForm = () => {
-  const { user } = useSelector(state => state.auth);
+  const { user } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   const [name, setName] = useState(user.username || 'Usuario');

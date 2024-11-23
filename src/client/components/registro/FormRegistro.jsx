@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {FaEye, FaEyeSlash} from 'react-icons/fa';
 import {useNavigate} from 'react-router-dom';
-import {useAuth} from "../../context/AuthContext.js";
+import {useUserInfo} from "../../context/UserContext.js";
 
 const FormRegistro = () => {
-    const {signUp, errors: registerErrors, isAuthenticated} = useAuth();
+    const {signUp, errors: registerErrors, isAuthenticated} = useUserInfo();
     const navigate = useNavigate();
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [email, setEmail] = useState('');

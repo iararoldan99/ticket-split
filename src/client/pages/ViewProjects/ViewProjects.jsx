@@ -10,12 +10,13 @@ import projectIcon3 from '../../assets/img/ProjectIcon3.svg';
 import projectIcon1 from '../../assets/img/ProjectIcon1.svg';
 import projectIcon4 from '../../assets/img/ProjectIcon4.svg';
 import {motion} from 'framer-motion';
-import {useAuth} from "../../context/AuthContext.js";
+import {useUserInfo} from "../../context/UserContext.js";
 
 const ViewProjects = () => {
     const [projects, setProjects] = useState([]);
+    const {user} = useSelector((state) => state.user);
 
-    const {authInfo} = useAuth();
+    const {userInfo} = useUserInfo();
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -51,7 +52,7 @@ const ViewProjects = () => {
                 <div className="w-full flex flex-col lg:flex-row mt-10 px-6 lg:px-8 space-y-10 lg:space-y-0 lg:ml-40">
                     <div className="w-full lg:w-2/3 flex flex-col lg:flex-row lg:items-start items-start lg:space-x-8">
                         <div>
-                            <UserHeader userName={authInfo?.username} sectionName="Ver Proyectos"/>
+                            <UserHeader userName={user?.username} sectionName="Ver Proyectos"/>
                             <SidebarNavigation/>
                         </div>
 

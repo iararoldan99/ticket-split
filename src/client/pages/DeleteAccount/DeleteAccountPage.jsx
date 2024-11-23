@@ -6,12 +6,13 @@ import NavbarDashboard from '../../layout/Navbar/NavbarDashboard';
 import SidebarNavigation from '../../components/myAccount/SidebarNavigation';
 import UserHeader from '../../components/myAccount/UserHeader';
 import Footer from '../../layout/Footer/Footer';
-import {useAuth} from "../../context/AuthContext.js";
+import {useUserInfo} from "../../context/UserContext.js";
 
 const DeleteAccountPage = () => {
     const navigate = useNavigate();
+    const {user} = useSelector((state) => state.user);
 
-    const {authInfo} = useAuth();
+    const {userInfo} = useUserInfo();
 
     const handleDelete = () => {
         console.log("Cuenta eliminada");
@@ -29,7 +30,7 @@ const DeleteAccountPage = () => {
                     transition={{duration: 1.2, ease: "easeOut"}}
                 >
                     <div>
-                        <UserHeader userName={authInfo?.username} sectionName="Eliminar cuenta"/>
+                        <UserHeader userName={user?.username} sectionName="Eliminar cuenta"/>
                         <SidebarNavigation/>
                     </div>
 

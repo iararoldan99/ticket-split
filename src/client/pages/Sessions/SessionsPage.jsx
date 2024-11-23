@@ -8,7 +8,7 @@ import SessionList from '../../components/sessions/SessionList';
 import laptopIcon from '../../assets/img/laptopIcon.svg';
 import mobileIcon from '../../assets/img/mobileIcon.svg';
 import {motion} from 'framer-motion';
-import {useAuth} from "../../context/AuthContext.js";
+import {useUserInfo} from "../../context/UserContext.js";
 
 const sessionsData = [
     {
@@ -26,7 +26,8 @@ const sessionsData = [
 ];
 
 const SessionsPage = () => {
-    const {authInfo} = useAuth();
+    const {userInfo} = useUserInfo();
+    const {user} = useSelector((state) => state.user);
 
     return (
         <>
@@ -40,7 +41,7 @@ const SessionsPage = () => {
                     transition={{duration: 0.8, ease: "easeOut"}}
                 >
                     <div>
-                        <UserHeader userName={authInfo?.username} sectionName="Sesiones"/>
+                        <UserHeader userName={user?.username} sectionName="Sesiones"/>
                         <SidebarNavigation/>
                     </div>
 

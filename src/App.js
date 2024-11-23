@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { Provider } from 'react-redux';
 import { AnimatePresence } from 'framer-motion';
 import { store } from './client/store/store.js';
-import {AuthProvider} from './client/context/AuthContext.js';
+import {UserProvider} from './client/context/UserContext.js';
 import Landing from './client/pages/Landing/Landing.jsx';
 import Login from './client/pages/Login/Login.jsx';
 import Registro from './client/pages/Registro/Registro.jsx';
@@ -89,11 +89,11 @@ function AnimatedRoutes() {
 function App() {
   return (
     <Provider store={store}>
-      <AuthProvider>
+      <UserProvider>
         <Router>
           <AnimatedRoutes />
         </Router>
-      </AuthProvider>
+      </UserProvider>
     </Provider>
   );
 }

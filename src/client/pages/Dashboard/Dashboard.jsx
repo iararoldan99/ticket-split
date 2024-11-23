@@ -7,17 +7,18 @@ import CargarSaldoModal from '../../components/dashboard/CargarSaldoModal';
 import AdditionalOptions from '../../components/dashboard/AdditionalOptions';
 import {setMonthlyBudget} from '../../store/user/userSlice.js';
 import UltimosMovimientos from '../../components/dashboard/UltimosMovimientos.jsx';
-import {useAuth} from "../../context/AuthContext.js";
+import {useUserInfo} from "../../context/UserContext.js";
 
 const Dashboard = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const dispatch = useDispatch();
-    const {authInfo} = useAuth();
+    const {userInfo} = useUserInfo();
     const {user} = useSelector((state) => state.user);
+    const {movements} = useSelector((state) => state.movement);
     const totalBudget = user.monthlyBudget || 0;
 
-    const currentSpent = user.movements.length > 0
-        ? user.movements.reduce((total, movement) => total + (movement.amount || 0), 0)
+    const currentSpent = movements.length > 0
+        ? movements.reduce((total, movement) => total + (movement.amount || 0), 0)
         : 0;
 
     const progress = totalBudget > 0 ? (currentSpent / totalBudget) * 100 : 0;
@@ -32,7 +33,7 @@ const Dashboard = () => {
             <NavbarDashboard/>
             <div className="w-full bg-white-100 py-4 mt-12">
                 <h1 className="text-4xl font-bold text-black text-center">
-                    ¡Buenos días, {authInfo?.username || 'invitado'}!✌️
+                    ¡Buenos días, {user?.username || 'invitado'}!✌️
                 </h1>
             </div>
 

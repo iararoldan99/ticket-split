@@ -5,10 +5,11 @@ import Footer from '../../layout/Footer/Footer';
 import ProjectForm from '../../components/projectCreate/ProjectForm';
 import UserHeader from '../../components/projectCreate/UserHeader';
 import SidebarNavigation from '../../components/projectCreate/SidebarNavigation';
-import {useAuth} from "../../context/AuthContext.js";
+import {useUserInfo} from "../../context/UserContext.js";
 
 const ProjectCreate = () => {
-    const {authInfo} = useAuth();
+    const {userInfo} = useUserInfo();
+    const {user} = useSelector((state) => state.user);
 
     return (
         <>
@@ -17,7 +18,7 @@ const ProjectCreate = () => {
                 <div className="w-full flex flex-col lg:flex-row mt-10 px-6 lg:px-8 space-y-10 lg:space-y-0 lg:ml-40">
                     <div className="w-full lg:w-2/3 flex flex-col lg:flex-row lg:items-start items-start lg:space-x-8">
                         <div>
-                            <UserHeader userName={authInfo?.username} sectionName="Crear Proyecto"/>
+                            <UserHeader userName={user?.username} sectionName="Crear Proyecto"/>
                             <SidebarNavigation/>
                         </div>
 

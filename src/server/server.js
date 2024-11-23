@@ -5,7 +5,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
-import authRoutes from './routes/auth.routes.js';
+import userRoutes from './routes/user.routes.js';
 
 dotenv.config();
 
@@ -18,7 +18,7 @@ app.use(cors({
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use('/api/auth', authRoutes);
+app.use('/api/', userRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'Servidor de Express funcionando' });

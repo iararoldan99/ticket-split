@@ -10,7 +10,7 @@ import SplitBillModal from '../../components/splitBill/SplitBillModal';
 import shareImage from '../../assets/img/share.svg';
 import {v4 as uuidv4} from 'uuid';
 import {motion} from 'framer-motion';
-import {useAuth} from "../../context/AuthContext.js";
+import {useUserInfo} from "../../context/UserContext.js";
 import {useProjects} from '../../context/ProjectContext.js';
 
 const pageTransition = {
@@ -22,7 +22,7 @@ const pageTransition = {
 
 const SplitBill = () => {
     const {projects, getProject, addExpense} = useProjects();
-    const {authInfo} = useAuth();
+    const {userInfo} = useUserInfo();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -62,10 +62,10 @@ const SplitBill = () => {
         const success = await getProject(projectId);
         if (success) {
             const selected = projects.find((proj) => proj.id === parseInt(projectId));
-            const isUserInProject = selected.members.includes(authInfo?.username);
+            const isUserInProject = selected.members.includes(userInfo?.username);
             const updatedProject = isUserInProject ? selected : {
                 ...selected,
-                members: [...selected.members, authInfo?.username],
+                members: [...selected.members, userInfo?.username],
             };
             setSelectedProject(updatedProject);
         }

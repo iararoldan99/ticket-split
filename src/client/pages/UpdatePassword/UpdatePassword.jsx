@@ -5,10 +5,11 @@ import Footer from '../../layout/Footer/Footer';
 import SidebarNavigation from '../../components/myAccount/SidebarNavigation';
 import HeaderIcon from '../../components/myAccount/UserHeader';
 import UpdatePasswordForm from '../../components/updatePassword/UpdatePasswordForm';
-import {useAuth} from "../../context/AuthContext.js";
+import {useUserInfo} from "../../context/UserContext.js";
 
 const UpdatePassword = () => {
-    const {authInfo} = useAuth();
+    const {userInfo} = useUserInfo();
+    const {user} = useSelector((state) => state.user);
 
     return (
         <>
@@ -18,7 +19,7 @@ const UpdatePassword = () => {
                 <div className="w-full flex flex-col lg:flex-row mt-10 px-6 lg:px-8 space-y-10 lg:space-y-0 lg:ml-40">
 
                     <div>
-                        <HeaderIcon userName={authInfo?.username} sectionName="Contraseña"/>
+                        <HeaderIcon userName={user?.username} sectionName="Contraseña"/>
                         <SidebarNavigation/>
                     </div>
 

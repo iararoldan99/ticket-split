@@ -10,7 +10,7 @@ const NavbarDashboard = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
 
-  const user = useSelector((state) => state.auth);
+  const {user} = useSelector((state) => state.user);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -105,19 +105,25 @@ const NavbarDashboard = () => {
               >
                 <button
                   onClick={() => handleNavigation('/mi-cuenta')}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:shadow-md w-full text-left"
+                  className="block px-4 py-2 text-gray-700 text-left"
                 >
                   Mi cuenta
                 </button>
+                  <Link
+                      to="/mi-cuenta/notificaciones"
+                      className="block px-4 py-2 text-gray-700 "
+                  >
+                      Notificaciones
+                  </Link>
                 <Link
                   to="/mi-cuenta/editar-perfil"
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:shadow-md"
+                  className="block px-4 py-2 text-gray-700 "
                 >
                   Configuración
                 </Link>
                 <button
                   onClick={() => handleNavigation('/')}
-                  className="block px-4 py-2 text-red-500 hover:bg-gray-100 hover:shadow-md w-full text-left"
+                  className="block px-4 py-2 text-red-500 w-full text-left"
                 >
                   Cerrar sesión
                 </button>

@@ -6,7 +6,7 @@ import defaultPic from '../../assets/img/Pic.svg';
 import {useUserInfo} from "../../context/UserContext.js";
 
 const UltimosMovimientos = () => {
-    const {user} = useUserInfo();
+    const {movements} = useSelector((state) => state.movement);
     const navigate = useNavigate();
 
     const handleViewAll = () => {
@@ -25,9 +25,9 @@ const UltimosMovimientos = () => {
                 </button>
             </div>
 
-            {user.movements && user.movements.length > 0 ? (
+            {movements && movements.length > 0 ? (
                 <div className="space-y-4 w-11/12 md:w-2/3 mx-auto">
-                    {user.movements.map((mov) => (
+                    {movements.map((mov) => (
                         <MovimientoItem
                             key={mov.id}
                             icon={mov.avatar || '/default-avatar.jpg'}

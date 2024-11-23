@@ -15,18 +15,19 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
-    name: {
+    password: {
       type: String,
       required: true,
     },
-    description: {
-      type: String,
-      required: false,
+    profile: {
+      firstName: { type: String },
+      lastName: { type: String },
+      age: { type: Number },
+      description: { type: String },
+      city: { type: String }
     },
-    location: {
-      type: String,
-      required: false,
-    },
+    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    createdAt: { type: Date, default: Date.now }
   },
   {
     timestamps: true,

@@ -33,6 +33,13 @@ const SidebarNavigation = () => {
         Contraseña
       </Link>
 
+        <Link
+            to="/mi-cuenta/notificaciones"
+            className={`block text-gray-500 mb-4 whitespace-nowrap ${location.pathname === '/notificaciones' ? 'text-black font-bold' : ''}`}
+        >
+            Notificaciones
+        </Link>
+
       <Link
         to="/mi-cuenta/sesiones"
         className={`block text-gray-500 mb-4 whitespace-nowrap ${location.pathname === '/mi-cuenta/sesiones' ? 'text-black font-bold' : ''}`}

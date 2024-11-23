@@ -5,10 +5,11 @@ import Footer from '../../layout/Footer/Footer';
 import SidebarNavigation from '../../components/myAccount/SidebarNavigation';
 import EditProfileForm from '../../components/editProfile/EditProfileForm';
 import UserHeader from '../../components/myAccount/UserHeader';
-import {useAuth} from "../../context/AuthContext.js";
+import {useUserInfo} from "../../context/UserContext.js";
 
 const EditProfile = () => {
-    const {authInfo} = useAuth();
+    const {userInfo} = useUserInfo();
+    const {user} = useSelector((state) => state.user);
 
     return (
         <>
@@ -17,7 +18,7 @@ const EditProfile = () => {
                 <div className="w-full flex flex-col lg:flex-row mt-10 px-6 lg:px-8 space-y-10 lg:space-y-0 lg:ml-40">
 
                     <div>
-                        <UserHeader userName={authInfo?.username} sectionName="Editar Perfil"/>
+                        <UserHeader userName={user?.username} sectionName="Editar Perfil"/>
                         <SidebarNavigation/>
                     </div>
 

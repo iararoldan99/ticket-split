@@ -4,14 +4,14 @@ import {Link, useNavigate} from 'react-router-dom';
 import mobileAppImage from '../../assets/img/Group 1948759423 (1).svg';
 import playStoreImg from '../../assets/img/App Store.svg';
 import appImg from '../../assets/img/Google Play.svg';
-import {useAuth} from "../../context/AuthContext.js";
+import {useUserInfo} from "../../context/UserContext.js";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
-    const {signIn, isAuthenticated} = useAuth();
+    const {signIn, isAuthenticated} = useUserInfo();
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -41,7 +41,7 @@ const LoginForm = () => {
 
                     <form className="space-y-4" onSubmit={handleSubmit}>
                         <div>
-                            <label className="block text-gray-700">Usuario o correo electrónico</label>
+                            <label className="block text-gray-700">Ingresá tu correo electrónico</label>
                             <input
                                 type="email"
                                 value={email}

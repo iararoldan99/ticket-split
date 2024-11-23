@@ -6,7 +6,7 @@ import { useSelector} from 'react-redux';
 
 const AccountForm = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector(state => state.auth);
+  const { user } = useSelector(state => state.user);
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
   const [isEditing, setIsEditing] = useState(false);
