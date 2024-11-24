@@ -4,14 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2131c591-430e-4e94-9b7e-0cdc5ef3d254" name="Changes" comment="agregando cosas al back">
-      <change afterPath="$PROJECT_DIR$/src/server/service/mail.service.js" afterDir="false" />
+    <list default="true" id="2131c591-430e-4e94-9b7e-0cdc5ef3d254" name="Changes" comment="implemento envío de mails con resend">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/api/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/api/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/forgotPass/ForgotPasswordForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/forgotPass/ForgotPasswordForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/forgotPass/ResetPasswordForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/forgotPass/ResetPasswordForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/context/UserContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/context/UserContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/controllers/movements.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/controllers/movements.controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/controllers/user.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/controllers/user.controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/models/user.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/models/user.model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/routes/user.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/routes/user.routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/schemas/user.schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/schemas/user.schema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/service/mail.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/service/mail.service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/service/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/service/user.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,7 +94,7 @@
       <updated>1730126605844</updated>
       <workItem from="1730126607605" duration="294000" />
       <workItem from="1730126922372" duration="12995000" />
-      <workItem from="1732311913432" duration="25697000" />
+      <workItem from="1732311913432" duration="32386000" />
     </task>
     <task id="LOCAL-00001" summary="update git ignore">
       <option name="closed" value="true" />
@@ -122,7 +128,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732405790327</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="implemento envío de mails con resend">
+      <option name="closed" value="true" />
+      <created>1732414512378</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732414512378</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,7 +158,8 @@
     <MESSAGE value="git merge" />
     <MESSAGE value="agrego modelos, contextos, controllers, rutas, schemas, slices y algunas cosas más del backend (no está terminado)" />
     <MESSAGE value="agregando cosas al back" />
-    <option name="LAST_COMMIT_MESSAGE" value="agregando cosas al back" />
+    <MESSAGE value="implemento envío de mails con resend" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemento envío de mails con resend" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -154,6 +169,24 @@
           <line>126</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/server/service/user.service.js</url>
+          <line>123</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/server/service/user.service.js</url>
+          <line>133</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/server/service/user.service.js</url>
+          <line>136</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

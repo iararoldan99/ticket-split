@@ -33,3 +33,18 @@ export const sendWelcomeMail = async (toEmail) => {
     console.error("Error al enviar el correo de bienvenida:", error);
   }
 };
+
+export const sendPasswordResetEmail = async (toEmail, resetToken) => {
+  console.log('entre aca')
+  const resetUrl = `http://localhost:3000/nueva-contrasena?token=${resetToken}`; // Cambia a tu URL real
+
+  try {
+    await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: toEmail,
+      subject: 'Restablecimiento de Contraseña',
+      html: `<h1>Recupera tu contraseña</h1><p>Haz clic en el siguiente enlace para restablecer tu contraseña: ${resetUrl}</p>`,    });
+    console.log(`Correo de reset de contraseña enviado a ${toEmail}`);
+  } catch (error) {
+  }
+};

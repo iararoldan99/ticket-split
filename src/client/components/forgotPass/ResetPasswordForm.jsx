@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Modal from './Modal'; 
+import Modal from './Modal';
+import {useUserInfo} from "../../context/UserContext.js";
 
 const ResetPasswordForm = () => {
   const [newPassword, setNewPassword] = useState('');
@@ -16,7 +17,8 @@ const ResetPasswordForm = () => {
   });
   const [errorMessage, setErrorMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const { passwordReset } = useUserInfo();
 
   useEffect(() => {
     const passwordIsValid =
@@ -30,14 +32,20 @@ const ResetPasswordForm = () => {
     setChangeValid(passwordIsValid);
   }, [passwordCriteria]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (newPassword === confirmPassword) {
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  const token = new URLSearchParams(window.location.search).get('token');
+  if (newPassword === confirmPassword) {
+    const success = await passwordReset(token, newPassword);
+    if (success) {
       setShowModal(true);
     } else {
-      setErrorMessage('Las contraseñas no coinciden.');
+      setErrorMessage('Error al restablecer la contraseña.');
     }
-  };
+  } else {
+    setErrorMessage('Las contraseñas no coinciden.');
+  }
+};
 
   const validatePassword = (password) => {
     const criteria = {
@@ -64,7 +72,7 @@ const ResetPasswordForm = () => {
       } else if (!criteria.specialChar) {
         setErrorMessage('La contraseña debe tener al menos un carácter especial.');
       } else {
-        setErrorMessage(''); 
+        setErrorMessage('');
       }
     }
   };
@@ -73,13 +81,13 @@ const ResetPasswordForm = () => {
     if (newPassword || confirmPassword) {
       validatePassword(newPassword);
     } else {
-      setErrorMessage(''); 
+      setErrorMessage('');
     }
   }, [newPassword, confirmPassword]);
 
   const handleModalClose = () => {
-    setShowModal(false); 
-    navigate('/login'); 
+    setShowModal(false);
+    navigate('/login');
   };
 
   return (

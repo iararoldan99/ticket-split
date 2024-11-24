@@ -1,6 +1,5 @@
 import * as movementService from "../services/movement.service.js";
 
-// Obtener todos los movimientos
 export const getMovements = async (req, res) => {
   try {
     const movements = await movementService.getAllMovements();
@@ -10,7 +9,6 @@ export const getMovements = async (req, res) => {
   }
 };
 
-// Obtener movimientos por usuario
 export const getMovementByUserId = async (req, res) => {
   const { userId } = req.params;
   try {
@@ -21,7 +19,6 @@ export const getMovementByUserId = async (req, res) => {
   }
 };
 
-// Obtener un movimiento específico
 export const getMovementById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -32,7 +29,6 @@ export const getMovementById = async (req, res) => {
   }
 };
 
-// Agregar un movimiento
 export const addMovement = async (req, res) => {
   const movementData = req.body;
   try {
@@ -43,7 +39,6 @@ export const addMovement = async (req, res) => {
   }
 };
 
-// Actualizar un movimiento
 export const updateMovement = async (req, res) => {
   const { id } = req.params;
   const updateData = req.body;
@@ -55,7 +50,6 @@ export const updateMovement = async (req, res) => {
   }
 };
 
-// Eliminar un movimiento
 export const deleteMovement = async (req, res) => {
   const { id } = req.params;
   try {

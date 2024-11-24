@@ -162,3 +162,28 @@ export const deleteFriend = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+export const requestPasswordReset = async (req, res) => {
+  try {
+    const { email } = req.body;
+    console.log('email: ', req.body.email)
+    await userService.requestPasswordReset(email);
+
+    res.status(200).json({ message: 'Correo de restablecimiento enviado. Revisa tu bandeja de entrada.' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { token, newPassword } = req.body;
+    console.log(token)
+    console.log(newPassword)
+    await userService.resetPassword(token, newPassword);
+
+    res.status(200).json({ message: 'Contraseña restablecida correctamente.' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

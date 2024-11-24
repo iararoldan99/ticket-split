@@ -1,7 +1,7 @@
 import React, {createContext, useContext, useState, useEffect} from 'react';
 import Cookies from "js-cookie";
 import {useDispatch} from 'react-redux';
-import {loginRequest, registerReq, verifyTokenRequest} from "../api/user.js";
+import {loginRequest, registerReq, requestPasswordReset, resetPassword, verifyTokenRequest} from "../api/user.js";
 import {setAuthenticated, setFriends, setUserData} from "../store/user/userSlice.js";
 const UserContext = createContext();
 
@@ -98,6 +98,38 @@ export const UserProvider = ({children}) => {
     }
   }
 
+  const passwordResetRequest = async (email) => {
+    try {
+      console.log('estoy')
+      const res = await requestPasswordReset(email);
+      if (res.status === 200) {
+        console.log('success')
+        return true;
+      }
+      console.log(res.data)
+      return false;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const passwordReset = async (token, newPassword) => {
+    try {
+      console.log('estoy')
+      console.log(token)
+      const res = await resetPassword(token, newPassword);
+      if (res.status === 200) {
+        console.log('success')
+        return true;
+      }
+      console.log(res.data)
+      return false;
+    } catch (error) {
+      console.log(error.response.data.message || error.message);
+      return false;
+    }
+  }
+
   useEffect(() => {
     const checkLogin = async () => {
       const cookies = Cookies.get();
@@ -136,6 +168,10 @@ export const UserProvider = ({children}) => {
         getLoggedUserInfo,
         userInfo,
         friendsData,
+        getFriends,
+        getUserInfo,
+        passwordResetRequest,
+        passwordReset,
       }}
     >
       {children}

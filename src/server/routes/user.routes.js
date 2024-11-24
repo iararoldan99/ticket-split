@@ -3,12 +3,11 @@ import {
   getUserById, getUsers,
   login, logout, register,
   updateUserById, verifyToken,
-  addFriend, getFriends, deleteFriend, sendMail
+  addFriend, getFriends, deleteFriend, sendMail, requestPasswordReset, resetPassword
 } from "../controllers/user.controller.js";
 import { validateSchema } from "../middlewares/validator.middleware.js";
 import { loginSchema, registerSchema } from "../schemas/user.schema.js";
 import { auth } from "../middlewares/auth.middleware.js";
-import {requestPasswordReset, resetPassword} from "../service/user.service.js";
 
 const router = Router();
 
@@ -17,8 +16,8 @@ router.post("/register", validateSchema(registerSchema), register); // funciona
 router.post("/login", validateSchema(loginSchema), login); // funciona
 router.get("/verify", verifyToken); // funciona
 router.post("/logout", logout); // funciona
-router.post('/request-password-reset', requestPasswordReset);
-router.post('/reset-password', resetPassword);
+router.post('/request-password-reset', requestPasswordReset); // funciona ok
+router.post('/reset-password', resetPassword); // anda
 
 // Rutas de usuario
 router.get('/user/:id', auth, getUserById); // funciona
@@ -27,7 +26,7 @@ router.get('/users', auth, getUsers); // funciona
 
 // mails
 
-router.post('/user/mail', sendMail);
+router.post('/user/mail', sendMail); // anda ok
 
 // Rutas para los contactos del usuario
 

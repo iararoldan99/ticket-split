@@ -1,6 +1,8 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
+import crypto from 'crypto';
 import { createAccessToken } from "../libs/jwt.js";
+import {sendPasswordResetEmail} from "./mail.service.js";
 
 export const getUsers = async (query, page, limit) => {
   const options = {
@@ -114,5 +116,40 @@ export const deleteFriend = async (userId, friendId) => {
     return friendId;
   } catch (error) {
     throw new Error(error.message);
+  }
+};
+
+export const requestPasswordReset = async (email) => {
+  console.log(email)
+  const user = await User.findOne({ email }); // Cambié email a { email }
+  if (!user) throw new Error('No se encontró un usuario con ese email');
+
+  const resetToken = crypto.randomBytes(32).toString('hex');
+
+  user.resetPasswordToken = resetToken;
+  user.resetPasswordExpires = Date.now() + 3600000; // 1 hora
+
+  await user.save();
+
+  await sendPasswordResetEmail(email, resetToken);
+};
+
+export const resetPassword = async (token, newPassword) => {
+  try {
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) throw new Error('El token de reseteo es inválido o ha expirado');
+
+    user.password = await bcrypt.hash(newPassword, 10);
+
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+
+    await user.save();
+  } catch (error) {
+    throw new Error('Error al resetear la contraseña: ' + error.message);
   }
 };
