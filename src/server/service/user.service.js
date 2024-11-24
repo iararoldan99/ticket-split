@@ -1,7 +1,5 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import { TOKEN_SECRET } from "../config.js";
 import { createAccessToken } from "../libs/jwt.js";
 
 export const getUsers = async (query, page, limit) => {
@@ -16,9 +14,14 @@ export const getUsers = async (query, page, limit) => {
     throw new Error("Error al paginar los usuarios: " + error.message);
   }
 };
+
 export const findUserByEmail = async (email) => {
   return await User.findOne({ email });
 };
+
+export const findUserByUsername = async (username) => {
+  return await User.findOne( {username} );
+}
 
 export const registerUser = async ({ username, email, password }) => {
   const passwordHash = await bcrypt.hash(password, 10);
@@ -48,11 +51,17 @@ export const loginUser = async (email, password) => {
 };
 
 export const findUserById = async (id) => {
-  return await User.findById(id);
+  return User.findById(id);
 };
 
-export const updateUserDetails = async (user, updates) => {
-  Object.assign(user, updates);
+export const updateUserDetails = async (id, updates) => {
+  const user = await User.findById(id);
+  if (!user) {
+    throw new Error("Usuario no encontrado");
+  }
+  Object.keys(updates).forEach(key => {
+    user[key] = updates[key];
+  });
   return await user.save();
 };
 
@@ -65,12 +74,14 @@ export const addFriend = async (userId, friendId) => {
       throw new Error("Usuario o amigo no encontrado");
     }
 
-    // Verifica si el amigo ya está en la lista de amigos
+    if (userId === friendId) {
+      throw new Error("No puedes agregarte a ti mismo como amigo");
+    }
+
     if (user.friends.includes(friendId)) {
       throw new Error("El usuario ya es amigo");
     }
 
-    // Agrega el amigo y guarda
     user.friends.push(friendId);
     await user.save();
 
@@ -80,17 +91,15 @@ export const addFriend = async (userId, friendId) => {
   }
 };
 
-// Obtener amigos de un usuario
 export const getFriends = async (userId) => {
   try {
-    const user = await User.findById(userId).populate("friends", "username email"); // Incluye solo campos específicos
+    const user = await User.findById(userId).populate("friends", "username email");
     return user.friends;
   } catch (error) {
     throw new Error(error.message);
   }
 };
 
-// Eliminar un amigo
 export const deleteFriend = async (userId, friendId) => {
   try {
     const user = await User.findById(userId);
@@ -99,7 +108,6 @@ export const deleteFriend = async (userId, friendId) => {
       throw new Error("Usuario no encontrado");
     }
 
-    // Filtra y elimina al amigo
     user.friends = user.friends.filter(friend => friend.toString() !== friendId);
     await user.save();
 

@@ -1,10 +1,9 @@
-// archivo: controllers/user.controller.js
 
 import * as userService from "../service/user.service.js";
 import { TOKEN_SECRET } from "../config.js";
 import jwt from "jsonwebtoken";
+import * as mailService from "../service/mail.service.js";
 
-// Registro de usuario
 export const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -24,7 +23,6 @@ export const register = async (req, res) => {
   }
 };
 
-// Login de usuario
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -42,7 +40,6 @@ export const login = async (req, res) => {
   }
 };
 
-// Verificación de token
 export const verifyToken = async (req, res) => {
   const { token } = req.cookies;
   if (!token) return res.status(401).json({ message: "No estás autenticado" });
@@ -57,13 +54,19 @@ export const verifyToken = async (req, res) => {
   });
 };
 
-// Logout de usuario
 export const logout = (req, res) => {
   res.cookie("token", "", { httpOnly: true, secure: true, expires: new Date(0) });
   res.status(200).json({ message: "Logout exitoso" });
 };
 
-// Obtener usuario por ID
+export const sendMail = async (req, res) => {
+  const { email } = req.body;
+  const user = await userService.findUserByEmail(email);
+  if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
+  await mailService.sendWelcomeMail(user.email);
+  res.status(200).json({ message: "Correo de bienvenida enviado" });
+}
+
 export const getUserById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -75,10 +78,10 @@ export const getUserById = async (req, res) => {
   }
 };
 
-// Actualizar usuario por ID
 export const updateUserById = async (req, res) => {
   const { id } = req.params;
   try {
+    console.log(req.body)
     const updates = req.body;
     const updatedUser = await userService.updateUserDetails(id, updates);
     res.json({ message: "Usuario actualizado con éxito", user: updatedUser });
@@ -87,7 +90,6 @@ export const updateUserById = async (req, res) => {
   }
 };
 
-// Obtener lista de usuarios con paginación
 export const getUsers = async (req, res) => {
   const page = req.query.page || 1;
   const limit = req.query.limit || 10;
@@ -100,7 +102,6 @@ export const getUsers = async (req, res) => {
   }
 };
 
-// Obtener usuarios por email
 export const getUsersByMail = async (req, res) => {
   const { email } = req.params;
   const page = req.query.page || 1;
@@ -116,18 +117,29 @@ export const getUsersByMail = async (req, res) => {
 };
 
 export const addFriend = async (req, res) => {
-  const { id: friendId } = req.body; // ID del amigo
+  const { username, email } = req.body; // Username o email del amigo
   const userId = req.user.id; // ID del usuario autenticado
 
   try {
-    const newFriend = await userService.addFriend(userId, friendId);
+    const friend = username
+      ? await userService.findUserByUsername(username)
+      : await userService.findUserByEmail(email);
+
+    if (!friend) {
+      return res.status(404).json({ message: "Amigo no encontrado" });
+    }
+
+    if (userId === friend._id.toString()) {
+      return res.status(400).json({ message: "No puedes agregarte a ti mismo como amigo" });
+    }
+
+    const newFriend = await userService.addFriend(userId, friend._id);
     res.status(200).json({ message: "Amigo agregado exitosamente", friend: newFriend });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
-// Obtener lista de amigos
 export const getFriends = async (req, res) => {
   const userId = req.user.id;
 
@@ -139,7 +151,6 @@ export const getFriends = async (req, res) => {
   }
 };
 
-// Eliminar un amigo
 export const deleteFriend = async (req, res) => {
   const { id: friendId } = req.params;
   const userId = req.user.id;
