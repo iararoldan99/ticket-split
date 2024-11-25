@@ -6,17 +6,19 @@ const movementSchema = new Schema(
   {
     userId: {
       type: String,
-      required: true,
+    },
+    projectId: {
+      type: String,
     },
     amount: {
       type: Number,
       required: true,
     },
-    type: {
+    type: { // tipos de movimientos: agregar/crear, actualizar, eliminar, dividir, gasto
       type: String,
       required: true,
     },
-    category: {
+    category: { // categorias: proyectos, amigos, gastos, ingresos
       type: String,
       required: false,
     },

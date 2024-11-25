@@ -1,18 +1,9 @@
-import * as movementService from "../services/movement.service.js";
+import * as movementService from "../service/movements.service.js";
 
 export const getMovements = async (req, res) => {
   try {
-    const movements = await movementService.getAllMovements();
-    res.json(movements);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-export const getMovementByUserId = async (req, res) => {
-  const { userId } = req.params;
-  try {
-    const movements = await movementService.getMovementsByUserId(userId);
+    const { id } = req.user;
+    const movements = await movementService.getAllMovements(id);
     res.json(movements);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -29,32 +20,23 @@ export const getMovementById = async (req, res) => {
   }
 };
 
+export const getAllMovementsByProjectId = async (req, res) => {
+  const { projectId } = req.params;
+  try {
+    const movements = await movementService.getAllMovByProjectId(projectId);
+    res.json(movements);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
 export const addMovement = async (req, res) => {
   const movementData = req.body;
+  const { id } = req.user;
+  console.log(id)
   try {
-    const newMovement = await movementService.createMovement(movementData);
+    const newMovement = await movementService.createMovement(id, movementData);
     res.status(201).json(newMovement);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-export const updateMovement = async (req, res) => {
-  const { id } = req.params;
-  const updateData = req.body;
-  try {
-    const updatedMovement = await movementService.updateMovement(id, updateData);
-    res.json(updatedMovement);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-export const deleteMovement = async (req, res) => {
-  const { id } = req.params;
-  try {
-    await movementService.deleteMovement(id);
-    res.json({ message: "Movimiento eliminado correctamente" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

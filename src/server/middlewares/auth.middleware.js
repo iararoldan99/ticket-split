@@ -13,7 +13,7 @@ export const auth = (req, res, next) => {
       if (error) {
         return res.status(401).json({ message: "Token is not valid" });
       }
-      req.user = user;
+      req.user = { id: user.id, ...user };
       next();
     });
   } catch (error) {
