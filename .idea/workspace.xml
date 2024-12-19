@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2131c591-430e-4e94-9b7e-0cdc5ef3d254" name="Changes" comment="agrego el contexto de los movimientos y demás funciones relacionadas">
+      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/assets/icons/gasto.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/assets/icons/social.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/assets/img/all-good.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/assets/img/descubri.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/assets/img/save.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/assets/img/saving.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/components/dashboard/BalanceChart.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/components/dashboard/ProjectList.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/components/projectCreate/Modal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/components/viewProjects/AddExpenseModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/components/viewProjects/AddFriendToProjectModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/components/viewProjects/ViewProjectDetail.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/pages/ViewProject/ViewProject.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/service/cloudinary.service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/service/multer.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/api/movements.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/api/movements.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/api/projects.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/api/projects.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/api/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/api/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/dashboard/MovimientoItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/dashboard/MovimientoItem.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/dashboard/UltimosMovimientos.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/dashboard/UltimosMovimientos.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/forgotPass/ForgotPasswordForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/forgotPass/ForgotPasswordForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/forgotPass/ResetPasswordForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/forgotPass/ResetPasswordForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/landing/About.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/landing/About.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/login/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/login/LoginForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/projectCreate/ProjectForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/projectCreate/ProjectForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/projectCreate/SidebarNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/projectCreate/SidebarNavigation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/registro/FormRegistro.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/registro/FormRegistro.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/splitBill/ProjectSelector.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/splitBill/ProjectSelector.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/splitBill/SplitBillModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/splitBill/SplitBillModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/viewProjects/ProjectItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/viewProjects/ProjectItem.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/viewProjects/ProjectList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/viewProjects/ProjectList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/constants/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/constants/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/context/MovementContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/context/MovementContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/context/ProjectContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/context/ProjectContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/context/UserContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/context/UserContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/layout/Navbar/NavbarDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/layout/Navbar/NavbarDashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/pages/Dashboard/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/pages/Dashboard/Dashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/pages/MyAccount/MyAccount.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/pages/MyAccount/MyAccount.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/pages/Notifications/Notifications.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/pages/Notifications/Notifications.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/pages/PrivateRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/pages/PrivateRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/pages/ProjectCreate/ProjectCreate.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/pages/CreateProject/CreateProject.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/pages/ProjectDetails/ProjectDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/pages/ProjectDetails/ProjectDetails.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/pages/SplitBill/SplitBill.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/pages/SplitBill/SplitBill.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/pages/ViewProjects/ViewProjects.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/pages/ViewProjects/ViewProjects.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/store/movements/movementSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/store/movements/movementSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/store/project/projectSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/store/project/projectSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/store/user/userSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/store/user/userSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/controllers/movements.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/controllers/movements.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/controllers/project.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/controllers/project.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/controllers/user.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/controllers/user.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/libs/jwt.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/libs/jwt.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/middlewares/auth.middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/middlewares/auth.middleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/models/movement.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/models/movement.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/models/project.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/models/project.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/models/user.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/models/user.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/routes/movements.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/routes/movements.routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/routes/project.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/routes/project.routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/routes/user.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/routes/user.routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/schemas/projects.schema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/service/mail.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/service/mail.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/service/movements.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/service/movements.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/service/project.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/service/project.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/service/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/service/user.service.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2o4QwFSNEVth6kBTgSF1Y7dbCIO" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.auth.controller.js.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+        <entry key="com.intellij.reactbuddy.storybook" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/client/assets/icons" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2131c591-430e-4e94-9b7e-0cdc5ef3d254" name="Changes" comment="" />
+      <created>1730126605844</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1730126605844</updated>
+      <workItem from="1730126607605" duration="294000" />
+      <workItem from="1730126922372" duration="12995000" />
+      <workItem from="1732311913432" duration="48127000" />
+      <workItem from="1732480267889" duration="10866000" />
+      <workItem from="1732537033256" duration="85000" />
+      <workItem from="1732570051741" duration="29088000" />
+      <workItem from="1732638646978" duration="2287000" />
+      <workItem from="1732750950056" duration="636000" />
+      <workItem from="1732835094973" duration="33317000" />
+      <workItem from="1732907285446" duration="18277000" />
+      <workItem from="1733179024486" duration="7665000" />
+      <workItem from="1734033157670" duration="36012000" />
+    </task>
+    <task id="LOCAL-00001" summary="update git ignore">
+      <option name="closed" value="true" />
+      <created>1731870308432</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731870308432</updated>
+    </task>
+    <task id="LOCAL-00002" summary="git merge">
+      <option name="closed" value="true" />
+      <created>1731871042125</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731871042125</updated>
+    </task>
+    <task id="LOCAL-00003" summary="agrego modelos, contextos, controllers, rutas, schemas, slices y algunas cosas más del backend (no está terminado)">
+      <option name="closed" value="true" />
+      <created>1731976932388</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731976932388</updated>
+    </task>
+    <task id="LOCAL-00004" summary="agregando cosas al back">
+      <option name="closed" value="true" />
+      <created>1732405790327</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732405790327</updated>
+    </task>
+    <task id="LOCAL-00005" summary="implemento envío de mails con resend">
+      <option name="closed" value="true" />
+      <created>1732414512378</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732414512378</updated>
+    </task>
+    <task id="LOCAL-00006" summary="implemento reset password con mail y token">
+      <option name="closed" value="true" />
+      <created>1732420995179</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732420995179</updated>
+    </task>
+    <task id="LOCAL-00007" summary="agrego el contexto de los movimientos y demás funciones relacionadas">
+      <option name="closed" value="true" />
+      <created>1732499458962</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1732499458962</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update git ignore" />
+    <MESSAGE value="git merge" />
+    <MESSAGE value="agrego modelos, contextos, controllers, rutas, schemas, slices y algunas cosas más del backend (no está terminado)" />
+    <MESSAGE value="agregando cosas al back" />
+    <MESSAGE value="implemento envío de mails con resend" />
+    <MESSAGE value="implemento reset password con mail y token" />
+    <MESSAGE value="agrego el contexto de los movimientos y demás funciones relacionadas" />
+    <option name="LAST_COMMIT_MESSAGE" value="agrego el contexto de los movimientos y demás funciones relacionadas" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/server/service/user.service.js</url>
+          <line>129</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/server/service/user.service.js</url>
+          <line>137</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/server/service/user.service.js</url>
+          <line>139</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/server/service/project.service.js</url>
+          <line>77</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
