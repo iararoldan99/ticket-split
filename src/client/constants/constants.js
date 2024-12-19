@@ -7,6 +7,7 @@ export const ROUTES = {
   DASHBOARD_ROUTE: '/dashboard',
   SPLIT_BILL_ROUTE: '/dividir-gastos',
   VIEW_PROJECTS_ROUTE: '/ver-proyectos',
+  VIEW_INDIVIDUAL_PROJECT_ROUTE: '/detalles-proyecto/:projectId',
   CREATE_PROJECTS_ROUTE: '/crear-proyecto',
   DELETE_PROJECT_ROUTE: '/eliminar-proyecto',
   PROJECT_DETAILS_ROUTE: '/detalles-proyecto',

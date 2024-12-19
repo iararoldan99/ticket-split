@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-const ProjectItem = ({ name, icon }) => {
+import icon3 from '../../assets/img/ProjectIcon3.svg';
+
+const ProjectItem = ({ project }) => {
   return (
     <motion.div
       className="flex flex-col items-center p-4"
@@ -19,14 +21,14 @@ const ProjectItem = ({ name, icon }) => {
         transition={{ type: "spring", stiffness: 200 }}
       >
         <img
-          src={icon}
-          alt={name}
+            src={project.pic || icon3}
+          alt={project.name}
           className="w-full h-full rounded-full object-cover"
         />
       </motion.div>
 
-      <Link to={`/detalles-proyecto/${encodeURIComponent(name)}`} className="text-lg font-bold text-black hover:underline">
-        {name}
+      <Link to={`/detalles-proyecto/${encodeURIComponent(project._id)}`} className="text-lg font-bold text-black hover:underline">
+        {project.name}
       </Link>
     </motion.div>
   );

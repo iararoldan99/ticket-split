@@ -1,26 +1,18 @@
 import React from 'react';
 import ProfileCard from './ProfileCard';
-import melany from '../../assets/img/Picture (9).png';  
-import iara from '../../assets/img/Picture (8).png'; 
-import empleado1 from '../../assets/img/Picture (2).png';  
+import iara from '../../assets/img/Picture (8).png';
+import empleado1 from '../../assets/img/Picture (2).png';
 import empleado2 from '../../assets/img/Picture (6).png';
 
 const About = () => {
     return (
-      <div className="container mx-auto my-16 px-4">  
-        <h2 className="text-center text-3xl font-bold mb-8">Quienes Somos</h2> 
+      <div className="container mx-auto my-16 px-4">
+        <h2 className="text-center text-3xl font-bold mb-8">Quienes Somos</h2>
         <p className="text-center text-lg text-gray-600 mb-12">
           Somos un equipo dedicado a ayudarte a gestionar tus gastos de manera simple y eficaz.
         </p>
-        
+
         <div className="grid gap-8 justify-center" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
-          <ProfileCard
-            name="Melany Serquen"
-            title="CEO y Founder"
-            description="+10 años de experiencia liderando equipos de desarrollo de software en grandes empresas."
-            profileImage={melany}
-            linkedInLink="https://linkedin.com/in/marialopez"
-          />
           <ProfileCard
             name="Iara Roldan"
             title="CEO y Founder"

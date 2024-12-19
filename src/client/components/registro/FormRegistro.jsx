@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import {useUserInfo} from "../../context/UserContext.js";
 
 const FormRegistro = () => {
-    const {signUp, errors: registerErrors, isAuthenticated} = useUserInfo();
+    const {signUpContext, errors: registerErrors, isAuthenticated} = useUserInfo();
     const navigate = useNavigate();
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [email, setEmail] = useState('');
@@ -58,8 +58,7 @@ const FormRegistro = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const resp = await signUp({email, username, password});
-        console.log(resp);
+        const resp = await signUpContext({email, username, password});
         navigate('/dashboard');
     };
 

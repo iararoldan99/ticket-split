@@ -1,85 +1,90 @@
-import React, {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import NavbarDashboard from '../../layout/Navbar/NavbarDashboard';
 import Footer from '../../layout/Footer/Footer';
-import ProgressBar from '../../components/dashboard/ProgressBar';
 import CargarSaldoModal from '../../components/dashboard/CargarSaldoModal';
-import AdditionalOptions from '../../components/dashboard/AdditionalOptions';
-import {setMonthlyBudget} from '../../store/user/userSlice.js';
 import UltimosMovimientos from '../../components/dashboard/UltimosMovimientos.jsx';
-import {useUserInfo} from "../../context/UserContext.js";
+import BalanceChart from '../../components/dashboard/BalanceChart.jsx';
+import descubri from '../../assets/img/all-good.png';
+import ProjectList from "../../components/dashboard/ProjectList.jsx";
+import {useNavigate} from "react-router-dom";
+import {useProjects} from "../../context/ProjectContext.js";
 
 const Dashboard = () => {
     const [isModalOpen, setModalOpen] = useState(false);
-    const dispatch = useDispatch();
-    const {userInfo} = useUserInfo();
-    const {user} = useSelector((state) => state.user);
-    const {movements} = useSelector((state) => state.movement);
-    const totalBudget = user.monthlyBudget || 0;
-
-    const currentSpent = movements.length > 0
-        ? movements.reduce((total, movement) => total + (movement.amount || 0), 0)
-        : 0;
-
-    const progress = totalBudget > 0 ? (currentSpent / totalBudget) * 100 : 0;
-
-    const isExceeded = currentSpent > totalBudget;
-
+    const { user } = useSelector((state) => state.user);
+    const navigate = useNavigate();
     const openModal = () => setModalOpen(true);
     const closeModal = () => setModalOpen(false);
+    const projects = useSelector((state) => state.project.projects || []);
 
     return (
         <>
-            <NavbarDashboard/>
-            <div className="w-full bg-white-100 py-4 mt-12">
-                <h1 className="text-4xl font-bold text-black text-center">
-                    ¡Buenos días, {user?.username || 'invitado'}!✌️
-                </h1>
-            </div>
-
-            <div className="min-h-screen flex flex-col justify-between bg-white-background">
-                <div className="mt-8 flex flex-col items-center text-center space-y-4">
-                    <div className="flex justify-center space-x-12">
-                        <div className="flex flex-col items-center">
-                            <h2 className="text-lg font-semibold">Saldo</h2>
-                            <p className="text-3xl font-bold">${totalBudget.toFixed(2)}</p>
-                        </div>
-                        <div className="hidden md:block h-16 border-l border-gray-300"></div>
-                        <div className="flex flex-col items-center">
-                            <h2 className="text-lg font-semibold">Gastos Registrados</h2>
-                            <p className={`text-3xl font-bold ${isExceeded ? 'text-red-600' : 'text-black'}`}>-${currentSpent.toFixed(2)}</p>
-                        </div>
-                    </div>
-
-                    <div className="mt-4 flex justify-center w-full px-8">
-                        <ProgressBar
-                            totalBudget={totalBudget}
-                            currentSpent={currentSpent}
-                            progress={progress}
-                            isExceeded={isExceeded}
-                            className="w-1/2"
-                        />
-                    </div>
-
-                    {isExceeded && (
-                        <p className="text-red-600 font-semibold">
-                            ¡Has excedido tu presupuesto mensual!
+            <NavbarDashboard />
+            <div className="bg-gray-50 py-8">
+                <div className="max-w-6xl mx-auto px-4">
+                    <div className="text-left mb-8">
+                        <h1 className="text-4xl font-bold text-gray-800 mb-2">
+                            ¡Buenos días, {user?.username || 'invitado'}!✌️
+                        </h1>
+                        <p className="text-lg text-gray-600">
+                            {new Date().toLocaleDateString('es-ES', {
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric'
+                            })}
                         </p>
-                    )}
+                    </div>
 
-                    <AdditionalOptions openModal={openModal}/>
+                    <div className="flex flex-col md:flex-row justify-between items-start space-y-8 md:space-y-0 md:space-x-8">
+                        <div className="flex flex-col space-y-4 w-full md:w-1/3">
+                            <div className="bg-white p-6 rounded-lg shadow-md">
+                                <h2 className="text-lg font-semibold text-gray-600">Gastos totales por proyecto</h2>
+                                <BalanceChart projects={projects} />
+                            </div>
+                            <div className="bg-white p-6 rounded-lg shadow-md">
+                                <div className="flex justify-between items-center mb-4">
+                                    <h2 className="text-lg font-semibold text-gray-600">Tus Proyectos</h2>
+                                    <button
+                                        onClick={() => navigate('/ver-proyectos')}
+                                        className="text-black hover:underline"
+                                    >
+                                        Ver todo
+                                    </button>
+                                </div>
+                                <ProjectList projects={projects}/>
+                            </div>
+                            <div className="bg-light-primary text-black flex items-center p-4 rounded-lg shadow-md">
+                                <div className="w-1/2">
+                                    <h3 className="text-xs uppercase font-bold">Invitá y Ganá</h3>
+                                    <p className="text-lg font-bold">Recomendá la app y ganá $10.000</p>
+                                </div>
+                                <div className="w-1/2 h-40 flex justify-end overflow-hidden">
+                                    <img src={descubri} alt="Descubri este beneficio" className="w-full h-full object-cover" />
+                                </div>
+                            </div>
+                        </div>
 
-                    <UltimosMovimientos/>
+                        <div className="w-full md:w-2/3">
+                            <div className="bg-white p-6 rounded-lg shadow-md">
+                                <div className="flex justify-between items-center mb-4">
+                                    <h3 className="text-xl font-semibold text-gray-800">Últimos Movimientos</h3>
+                                    <button className="text-black hover:underline"
+                                            >
+                                        Ver todo
+                                    </button>
+                                </div>
+                                <input type="text" placeholder="Buscar" className="w-full mb-4 p-2 border rounded-lg"/>
+                                <UltimosMovimientos/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <Footer/>
-
-                <CargarSaldoModal
-                    isOpen={isModalOpen}
-                    onClose={closeModal}
-                    onSave={(saldo) => dispatch(setMonthlyBudget(saldo))}
-                />
             </div>
+
+            <Footer/>
+
+            <CargarSaldoModal isOpen={isModalOpen} onClose={closeModal}/>
         </>
     );
 };

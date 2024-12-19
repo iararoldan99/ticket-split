@@ -25,9 +25,17 @@ const projectSlice = createSlice({
       const {projectId} = action.payload;
       state.projects = state.projects.filter(project => project.id !== projectId);
     },
-    addExpenseToProject: (state, action) => {
+    /*addExpenseToProjectSlice: (state, action) => {
       const {projectId, expense} = action.payload;
       const project = state.find(proj => proj.id === projectId);
+      if (project) {
+        project.expenses = project.expenses || [];
+        project.expenses.push(expense);
+      }
+    }*/
+    addExpenseToProjectSlice: (state, action) => {
+      const { projectId, expense } = action.payload;
+      const project = state.projects.find(proj => proj.id === projectId);
       if (project) {
         project.expenses = project.expenses || [];
         project.expenses.push(expense);
@@ -36,6 +44,6 @@ const projectSlice = createSlice({
   },
 });
 
-export const { addExpenseToProject ,setProjectsData, addProject, updateProject, deleteProject} = projectSlice.actions;
+export const { addExpenseToProjectSlice ,setProjectsData, addProject, updateProject, deleteProject} = projectSlice.actions;
 
 export default projectSlice.reducer;

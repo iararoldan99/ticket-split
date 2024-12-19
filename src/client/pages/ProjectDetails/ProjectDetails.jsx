@@ -4,30 +4,10 @@ import Footer from '../../layout/Footer/Footer';
 import SidebarNavigation from '../../components/projectCreate/SidebarNavigation';
 import UserHeader from '../../components/projectCreate/UserHeader';
 import ProjectForm from '../../components/projectCreate/ProjectForm';
-import user1 from '../../assets/img/user1.svg';
-import user2 from '../../assets/img/user2.svg';
-import user3 from '../../assets/img/user3.svg';
-import user4 from '../../assets/img/user4.svg';
-import user5 from '../../assets/img/user5.svg';
-import user6 from '../../assets/img/user6.svg';
-import {useUserInfo} from "../../context/UserContext.js";
-import {useSelector} from "react-redux"; //TODO: Hardcoded images
+import {useSelector} from "react-redux";
 
 const ProjectDetails = () => {
-    const {userInfo} = useUserInfo();
     const {user} = useSelector((state) => state.user);
-    const projectData = { //TODO: Get this data from the backend
-        projectName: 'Fiesta en casa',
-        description: 'Cumpleaños de Fran',
-        members: [
-            {name: 'Tobias', image: user1},
-            {name: 'Camila', image: user2},
-            {name: 'Cata', image: user3},
-            {name: 'Agus', image: user4},
-            {name: 'Andrea', image: user5},
-            {name: 'Nacho', image: user6},
-        ],
-    };
 
     return (
         <>
@@ -40,11 +20,8 @@ const ProjectDetails = () => {
                             <SidebarNavigation/>
                         </div>
                         <div className="w-full lg:w-3/4 p-8 mt-16">
-                            <ProjectForm
-                                initialProjectName={projectData.projectName}
-                                initialDescription={projectData.description}
-                                members={projectData.members}
-                            />
+                                <ProjectForm
+                                />
                         </div>
                     </div>
                 </div>

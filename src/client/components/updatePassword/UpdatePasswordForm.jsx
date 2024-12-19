@@ -14,30 +14,24 @@ const UpdatePasswordForm = () => {
       return;
     }
 
-    console.log("Contraseña actualizada con éxito:", {
-      currentPassword,
-      newPassword,
-      confirmPassword
-    });
-
     setCurrentPassword('');
     setNewPassword('');
     setConfirmPassword('');
   };
 
   return (
-    <motion.div 
-      className="relative w-full lg:w-[80%] mx-0 mt-20"  
-      initial={{ opacity: 0, y: 20 }}  
-      animate={{ opacity: 1, y: 0 }}    
+    <motion.div
+      className="relative w-full lg:w-[80%] mx-0 mt-20"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.2, ease: "easeOut" }}
-    > 
-      <motion.form 
+    >
+      <motion.form
         className="space-y-6 w-full"
         onSubmit={handleSubmit}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}  
+        transition={{ duration: 1.2, ease: "easeOut" }}
       >
         <div>
           <label className="block text-sm font-medium text-black" htmlFor="currentPassword">
@@ -59,7 +53,7 @@ const UpdatePasswordForm = () => {
 
         <div>
           <label className="block text-sm font-medium text-black" htmlFor="newPassword">
-            Nueva contraseña 
+            Nueva contraseña
           </label>
           <motion.input
             type="password"
@@ -100,7 +94,7 @@ const UpdatePasswordForm = () => {
           <p className="text-gray-500 mt-1">Desactívalos con una suscripción mensual para cuentas Pro.</p>
         </div>
 
-        <div className="flex justify-end mt-4 lg:ml-auto lg:w-2/3"> 
+        <div className="flex justify-end mt-4 lg:ml-auto lg:w-2/3">
           <motion.button
             type="submit"
             className="bg-[#B9FF66] text-black py-2 px-4 rounded-lg shadow-sm hover:bg-[#a3e65b] transition duration-300 font-semibold"

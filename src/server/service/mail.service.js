@@ -13,7 +13,6 @@ export const sendMail = async (email, subject, text) => {
       text,
       html: '<strong>Este es un correo de prueba</strong>',
     });
-    console.log('Correo enviado con Resend');
   } catch (error) {
     console.error('Error al enviar el correo con Resend:', error);
   }
@@ -34,9 +33,23 @@ export const sendWelcomeMail = async (toEmail) => {
   }
 };
 
+export const sendNotificationEmail = async (toEmail, subject, text, html) => {
+  try {
+    await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: toEmail,
+      subject: subject,
+      text: text,
+      html: html,
+    });
+    console.log(`Correo enviado a ${toEmail}`);
+  } catch (error) {
+    console.error("Error al enviar el correo:", error);
+  }
+};
+
 export const sendPasswordResetEmail = async (toEmail, resetToken) => {
-  console.log('entre aca')
-  const resetUrl = `http://localhost:3000/nueva-contrasena?token=${resetToken}`; // Cambia a tu URL real
+  const resetUrl = `http://localhost:3000/nueva-contrasena?token=${resetToken}`;
 
   try {
     await resend.emails.send({

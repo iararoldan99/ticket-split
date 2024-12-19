@@ -3,34 +3,36 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 export const expenseSchema = new mongoose.Schema({
-  id: { type: String, required: true },
-  description: { type: String, required: true },
-  amount: { type: Number, required: true },
-  splitMethod: { type: String, enum: ['equitative', 'percentage'], required: true },
-  splitDetails: [
-    {
-      member: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-      share: { type: Number, required: true },
-      percentage: { type: Number }
-    }
-  ],
-  date: { type: Date, default: Date.now }, // Fecha de cada gasto
+  description: { type: String },
+  amount: { type: Number },
+  date: { type: Date, default: Date.now },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
 const projectSchema = new Schema({
   ownerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  name: { type: String, required: true, unique: true, trim: true },
-  description: { type: String, trim: true },
-  members: [
-    {
-      userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-      username: { type: String },
-    }
-  ],
+  name: { type: String, unique: true, required:true },
+  description: { type: String },
+    members: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
   budget: { type: Number },
-  totalSpent: { type: Number, default: 0 }, // Se puede actualizar con el total de `expenses`
+  totalSpent: { type: Number, default: 0 },
   category: { type: String },
   expenses: [expenseSchema],
+  pic: { type: String },
+  billFile: { type: String },
+  splitMethod: { type: String, enum: ['equitative', 'percentage']},
+  splitDetails: [
+    {
+      member: { type: mongoose.Schema.Types.ObjectId, ref: 'User', },
+      share: { type: Number},
+      percentage: { type: Number }
+    }
+  ],
 }, {
   timestamps: true,
 });

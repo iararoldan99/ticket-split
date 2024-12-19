@@ -1,8 +1,23 @@
-import React, {createContext, useContext, useState, useEffect} from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import Cookies from "js-cookie";
-import {useDispatch} from 'react-redux';
-import {loginRequest, registerReq, requestPasswordReset, resetPassword, verifyTokenRequest} from "../api/user.js";
-import {setAuthenticated, setFriends, setUserData} from "../store/user/userSlice.js";
+import { useDispatch } from 'react-redux';
+import {
+  loginRequest,
+  logoutRequest,
+  registerReq,
+  verifyTokenRequest,
+  requestPasswordReset,
+  resetPassword,
+  deleteUserById,
+  getUserByEmailApi,
+  getUserByIdApi,
+} from "../api/user.js";
+import { setAuthenticated, setUserData } from "../store/user/userSlice.js";
+import { setMovementsData } from "../store/movements/movementSlice.js";
+import { setProjectsData } from "../store/project/projectSlice.js";
+import MovementContext from "./MovementContext.js";
+import ProjectContext from "./ProjectContext.js";
+
 const UserContext = createContext();
 
 export const useUserInfo = () => {
@@ -11,167 +26,176 @@ export const useUserInfo = () => {
   return context;
 };
 
-export const UserProvider = ({children}) => {
+export const UserProvider = ({ children }) => {
   const [authInfo, setAuthInfo] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
-  const [friendsData, setFriendsData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [friendsData, setFriendsData] = useState(null);
   const dispatch = useDispatch();
 
-  const getUserInfo = async (user) => {
+  // Contextos de movimientos y proyectos
+  const movementContext = useContext(MovementContext);
+  const projectContext = useContext(ProjectContext);
+
+  // INICIO DE SESIÓN
+  const signInContext = async (user) => {
     try {
-      const res = await getUserInfo(user);
-      if (res.data != null) {
+      const res = await loginRequest(user);
+      if (res.data) {
         dispatch(setUserData(res.data));
         dispatch(setAuthenticated(true));
-        setUserInfo(res.data)
+        setAuthInfo(res.data);
+        setUserInfo(res.data);
+
+        const movements = await movementContext.getAllMovements();
+        const projects = await projectContext.getAllProjects();
+
+        dispatch(setMovementsData(movements));
+        dispatch(setProjectsData(projects));
+
         return true;
       }
-      console.log(res.data)
       return false;
     } catch (error) {
-      console.log(error);
+      console.error("Error logging in:", error);
+      return false;
     }
   };
 
-  const getFriends = async () => {
+  // CIERRE DE SESIÓN
+  const logoutContext = async () => {
     try {
-      const res = await getFriends();
-      if (res.data != null) {
-        dispatch(setFriends(res.data));
-        setFriendsData(res.data)
-        return true;
-      }
-      console.log(res.data)
-      return false;
+      await logoutRequest();
+      Cookies.remove("token");
+      dispatch(setUserData(null));
+      dispatch(setMovementsData([]));
+      dispatch(setProjectsData([]));
+      dispatch(setAuthenticated(false));
+      setAuthInfo(null);
+      setUserInfo(null);
     } catch (error) {
-      console.log(error);
+      console.error("Error logging out:", error);
     }
   };
 
-  const signUp = async (user) => {
+  // REGISTRO DE USUARIO
+  const signUpContext = async (user) => {
     try {
       const res = await registerReq(user);
       if (res.status === 200) {
         dispatch(setUserData(res.data));
         setAuthInfo(res.data);
-        console.log(res.data)
+        setUserInfo(res.data);
         dispatch(setAuthenticated(true));
       }
     } catch (error) {
-      console.log(error.response.data);
+      console.error("Error registering user:", error);
     }
   };
 
-  const signIn = async (user) => {
+  // RESET PASSWORD REQUEST
+  const passwordResetRequestContext = async (email) => {
     try {
-      const res = await loginRequest(user);
-      if (res.data != null) {
-        dispatch(setUserData(res.data));
-        dispatch(setAuthenticated(true));
-        setAuthInfo(res.data)
-        return true;
-      }
-      console.log(res.data)
-      return false;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const logout = () => {
-    Cookies.remove("token");
-    dispatch(setUserData(null));
-    dispatch(setAuthenticated(false));
-    setAuthInfo(null);
-  };
-
-  const getLoggedUserInfo = async () => {
-    const cookies = Cookies.get();
-    console.log('cookies: ', cookies.token)
-    if (!cookies.token) return null;
-    const resp = await verifyTokenRequest(cookies.token);
-    console.log('esto devolvió: ', resp.data)
-    if(resp.data != null){
-      setAuthInfo(resp.data);
-      return resp.data;
-    }
-  }
-
-  const passwordResetRequest = async (email) => {
-    try {
-      console.log('estoy')
       const res = await requestPasswordReset(email);
-      if (res.status === 200) {
-        console.log('success')
-        return true;
-      }
-      console.log(res.data)
-      return false;
+      return res.status === 200;
     } catch (error) {
-      console.log(error);
+      console.error("Error requesting password reset:", error);
+      return false;
     }
-  }
+  };
 
-  const passwordReset = async (token, newPassword) => {
+  // RESET PASSWORD
+  const passwordResetContext = async (token, newPassword) => {
     try {
-      console.log('estoy')
-      console.log(token)
       const res = await resetPassword(token, newPassword);
-      if (res.status === 200) {
-        console.log('success')
-        return true;
-      }
-      console.log(res.data)
-      return false;
+      return res.status === 200;
     } catch (error) {
-      console.log(error.response.data.message || error.message);
+      console.error("Error resetting password:", error);
       return false;
     }
-  }
+  };
 
+  // OBTENER USUARIO POR EMAIL
+  const getUserByEmail = async (email) => {
+    try {
+      const res = await getUserByEmailApi(email);
+      return res.data || null;
+    } catch (error) {
+      console.error("Error fetching user by email:", error);
+      return null;
+    }
+  };
+
+  // OBTENER USUARIO POR ID
+  const getUserById = async (id) => {
+    try {
+      const res = await getUserByIdApi(id);
+      return res.data || null;
+    } catch (error) {
+      console.error("Error fetching user by ID:", error);
+      return null;
+    }
+  };
+
+  // ELIMINAR USUARIO POR ID
+  const deleteUserByIdContext = async (id) => {
+    try {
+      const res = await deleteUserById(id);
+      if (res.status === 200) {
+        setUserInfo(null);
+        setAuthInfo(null);
+        dispatch(setAuthenticated(false));
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      return false;
+    }
+  };
+
+  // VERIFICAR TOKEN AL REFRESCAR LA PÁGINA
   useEffect(() => {
     const checkLogin = async () => {
-      const cookies = Cookies.get();
-      console.log('la cookie: ', cookies.token)
-      if (!cookies.token) {
-        dispatch(setAuthenticated(false));
-        setLoading(false);
-        return;
-      }
-
       try {
-        const res = await verifyTokenRequest(cookies.token);
-        console.log(res);
-        if (!res.data) return dispatch(setAuthenticated(false));
-        dispatch(setAuthenticated(true));
-        dispatch(setUserData(res.data));
-        setAuthInfo(res.data);
-        setLoading(false);
+        const res = await verifyTokenRequest();
+        if (res.data) {
+          dispatch(setAuthenticated(true));
+          dispatch(setUserData(res.data));
+          setUserInfo(res.data);
+
+          const movements = await movementContext.getAllMovements();
+          const projects = await projectContext.getAllProjects();
+
+          dispatch(setMovementsData(movements));
+          dispatch(setProjectsData(projects));
+        } else {
+          dispatch(setAuthenticated(false));
+        }
       } catch (error) {
+        console.error("Error verifying token:", error);
         dispatch(setAuthenticated(false));
+      } finally {
         setLoading(false);
       }
     };
     checkLogin();
-  }, []);
-
+  }, [dispatch]);
 
   return (
     <UserContext.Provider
       value={{
         authInfo,
-        signUp,
-        signIn,
-        logout,
-        loading,
-        getLoggedUserInfo,
         userInfo,
-        friendsData,
-        getFriends,
-        getUserInfo,
-        passwordResetRequest,
-        passwordReset,
+        loading,
+        signInContext,
+        logoutContext,
+        signUpContext,
+        passwordResetRequestContext,
+        passwordResetContext,
+        getUserByEmail,
+        getUserById,
+        deleteUserByIdContext,
       }}
     >
       {children}

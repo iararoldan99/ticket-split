@@ -12,20 +12,17 @@ const movementSchema = new Schema(
     },
     amount: {
       type: Number,
-      required: true,
     },
-    type: { // tipos de movimientos: agregar/crear, actualizar, eliminar, dividir, gasto
+    type: {
       type: String,
-      required: true,
     },
-    category: { // categorias: proyectos, amigos, gastos, ingresos
+    category: {
       type: String,
-      required: false,
     },
     description: {
       type: String,
-      required: false,
     },
+    splitMethod: { type: String, enum: ['equitative', 'percentage']},
   },
   {
     timestamps: true,

@@ -25,7 +25,6 @@ const EditProfileForm = () => {
     e.preventDefault();
     dispatch(updateUser({ username: name }));
     setIsEditing(false);
-    console.log("Datos del perfil editado:", { name });
   };
 
   return (

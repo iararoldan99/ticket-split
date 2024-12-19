@@ -10,22 +10,15 @@ const NotificationsForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Notification settings saved", {
-      pendingBalance,
-      newProjects,
-      newFriends,
-      pushNotifications,
-      emailNotifications
-    });
   };
 
   return (
-    <motion.form 
-      className="space-y-6 w-full max-w-xl mx-auto px-0 lg:px-0 mt-20 ml-4" 
+    <motion.form
+      className="space-y-6 w-full max-w-xl mx-auto px-0 lg:px-0 mt-20 ml-4"
       onSubmit={handleSubmit}
-      initial={{ opacity: 0, y: 20 }} 
-      animate={{ opacity: 1, y: 0 }}  
-      transition={{ duration: 0.8, ease: "easeOut" }}  
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <h2 className="text-xl font-bold text-black" style={{ marginBottom: '2px' }}>Notificaciones</h2>
       <p className="text-gray-600" style={{ marginBottom: '2px' }}>Administrá las notificaciones que recibís</p>
@@ -42,7 +35,7 @@ const NotificationsForm = () => {
         <motion.div
           key={index}
           className="bg-gray-100 rounded-lg p-4 mb-4 flex items-center justify-between"
-          whileHover={{ scale: 1.02 }}  
+          whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.3 }}
         >
           <label className="block text-md text-gray-800">{item.label}</label>
@@ -59,17 +52,17 @@ const NotificationsForm = () => {
         </motion.div>
       ))}
 
-      <motion.div 
+      <motion.div
         className="flex justify-end mt-6"
-        initial={{ opacity: 0, y: 10 }}  
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <motion.button
           type="submit"
           className="bg-[#B9FF66] text-black py-2 px-6 rounded-lg shadow-sm hover:bg-[#a3e65b] transition duration-300 font-semibold"
-          whileHover={{ scale: 1.05 }}  
-          whileTap={{ scale: 0.95 }}    
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           Guardar cambios
         </motion.button>

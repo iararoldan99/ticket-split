@@ -15,7 +15,6 @@ const DeleteAccountPage = () => {
     const {userInfo} = useUserInfo();
 
     const handleDelete = () => {
-        console.log("Cuenta eliminada");
         navigate('/cuenta-eliminada');
     };
 

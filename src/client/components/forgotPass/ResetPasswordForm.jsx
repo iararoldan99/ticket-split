@@ -18,7 +18,7 @@ const ResetPasswordForm = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-  const { passwordReset } = useUserInfo();
+  const { passwordResetContext } = useUserInfo();
 
   useEffect(() => {
     const passwordIsValid =
@@ -36,7 +36,7 @@ const handleSubmit = async (event) => {
   event.preventDefault();
   const token = new URLSearchParams(window.location.search).get('token');
   if (newPassword === confirmPassword) {
-    const success = await passwordReset(token, newPassword);
+    const success = await passwordResetContext(token, newPassword);
     if (success) {
       setShowModal(true);
     } else {

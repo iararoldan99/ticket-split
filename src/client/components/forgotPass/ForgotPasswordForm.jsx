@@ -11,12 +11,11 @@ const ForgotPasswordForm = () => {
     const [email, setEmail] = useState('');
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
-    const {passwordResetRequest} = useUserInfo();
+    const {passwordResetRequestContext} = useUserInfo();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const success = await passwordResetRequest(email);
-        console.log(success)
+        const success = await passwordResetRequestContext(email);
         if (success && validMail) {
             setShowModal(true);
         }

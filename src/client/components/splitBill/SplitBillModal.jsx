@@ -11,7 +11,7 @@ const modalVariants = {
   visible: { opacity: 1, y: '0' },
 };
 
-const SplitBillModal = ({ message, onClose }) => {
+const SplitBillModal = ({ onClose }) => {
   return (
     <motion.div
       className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center"
@@ -31,8 +31,8 @@ const SplitBillModal = ({ message, onClose }) => {
           &times;
         </button>
         <div className="text-center">
-          <h2 className="text-2xl font-bold">{message.title || '¡Gasto guardado con éxito!'}</h2>
-          <p className="mt-4">{message.body || 'El gasto ha sido registrado correctamente.'}</p>
+          <h2 className="text-2xl font-bold">{'¡Dinero dividido con éxito!'}</h2>
+          <p className="mt-4">{'Se registró correctamente la división de dinero en tu proyecto.'}</p>
           <button
             className="mt-6 bg-green-500 text-white px-4 py-2 rounded-lg"
             onClick={onClose}

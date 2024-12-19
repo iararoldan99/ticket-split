@@ -9,9 +9,9 @@ export const getMovementById = async (id) => {
 };
 
 export const createMovement = async (userId, movementData) => {
-  console.log(userId)
-  const newMovement = new Movement({ userId, ...movementData });
-  console.log(newMovement)
+  const finalUserId = movementData.userId || userId;
+
+  const newMovement = new Movement({ userId: finalUserId, ...movementData });
   return await newMovement.save();
 };
 

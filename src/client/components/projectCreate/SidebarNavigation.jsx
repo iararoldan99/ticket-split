@@ -26,19 +26,11 @@ const SidebarNavigation = () => {
 
         <Link
           to="/ver-proyectos"
-          className={`block text-gray-500 mb-4 whitespace-nowrap ${location.pathname === '/viewProjects' ? 'text-black font-bold' : ''} transition-all duration-300`}
+          className={`block text-gray-500 mb-4 whitespace-nowrap ${location.pathname === '/ver-proyectos' ? 'text-black font-bold' : ''} transition-all duration-300`}
         >
           Ver proyectos
         </Link>
 
-        <hr className="my-2 w-3/4 border-t border-gray-300" />
-
-        <Link
-          to="/eliminar-proyecto"
-          className="block text-red-500 hover:underline whitespace-nowrap transition-all duration-300"
-        >
-          Eliminar proyecto
-        </Link>
       </motion.div>
     </motion.div>
   );

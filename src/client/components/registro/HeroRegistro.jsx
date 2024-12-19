@@ -5,11 +5,10 @@ import picRegistro from '../../assets/img/face-id.svg';
 const HeroRegistro = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Formulario enviado");
   };
 
   return (
-    <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center py-10">            
+    <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center py-10">
       <div className="md:w-1/2 w-full flex justify-center md:justify-start mb-8 md:mb-0">
         <div className="max-w-lg w-full">
           <h1 className="text-4xl font-bold mb-4">Te damos la bienvenida</h1>

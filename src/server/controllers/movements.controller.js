@@ -31,11 +31,14 @@ export const getAllMovementsByProjectId = async (req, res) => {
 }
 
 export const addMovement = async (req, res) => {
-  const movementData = req.body;
-  const { id } = req.user;
-  console.log(id)
+  const { userId, ...movementData } = req.body;
+
   try {
-    const newMovement = await movementService.createMovement(id, movementData);
+    if (userId && typeof userId !== 'string') {
+      return res.status(400).json({ message: "El userId proporcionado no es válido." });
+    }
+
+    const newMovement = await movementService.createMovement(req.user.id, { userId, ...movementData });
     res.status(201).json(newMovement);
   } catch (error) {
     res.status(500).json({ message: error.message });

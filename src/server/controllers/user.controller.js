@@ -3,6 +3,8 @@ import * as userService from "../service/user.service.js";
 import { TOKEN_SECRET } from "../config.js";
 import jwt from "jsonwebtoken";
 import * as mailService from "../service/mail.service.js";
+import * as MailService from "../service/mail.service.js";
+const isProduction = process.env.NODE_ENV === 'production';
 
 export const register = async (req, res) => {
   try {
@@ -16,7 +18,20 @@ export const register = async (req, res) => {
     const userSaved = await userService.registerUser({ username, email, password });
     const token = await userService.createUserToken(userSaved);
 
-    res.cookie("token", token, { secure: true, sameSite: "none" });
+    await MailService.sendNotificationEmail(
+      email,
+      "Bienvenido a TicketSplit",
+      "Se registró tu usuario exitosamente!",
+      `<h1>Registro exitoso! </h1><p><b>Username:</b> ${username}</p><p><b>Email:</b> ${email}</p>`
+    );
+
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
+      maxAge: 3 * 60 * 60 * 1000,
+    });
     res.json({ id: userSaved._id, username: userSaved.username, email: userSaved.email });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -33,7 +48,13 @@ export const login = async (req, res) => {
     }
 
     const token = await userService.createUserToken(userFound);
-    res.cookie("token", token, { secure: true, sameSite: "none" });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
+      maxAge: 3 * 60 * 60 * 1000,
+    });
     res.json({ id: userFound._id, username: userFound.username, email: userFound.email });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -41,17 +62,14 @@ export const login = async (req, res) => {
 };
 
 export const verifyToken = async (req, res) => {
-  const { token } = req.cookies;
-  if (!token) return res.status(401).json({ message: "No estás autenticado" });
+  try {
+    const user = await userService.findUserById(req.user.id);
+    if (!user) return res.status(401).json({ message: 'Usuario no encontrado' });
 
-  jwt.verify(token, TOKEN_SECRET, async (error, user) => {
-    if (error) return res.sendStatus(401);
-
-    const userFound = await userService.findUserById(user.id);
-    if (!userFound) return res.status(401).json({ message: 'Usuario no encontrado' });
-
-    res.json({ id: userFound._id, username: userFound.username, email: userFound.email });
-  });
+    res.json({ id: user._id, username: user.username, email: user.email });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 export const logout = (req, res) => {
@@ -78,10 +96,31 @@ export const getUserById = async (req, res) => {
   }
 };
 
+export const getUserByUsername = async (req, res) =>{
+  const { username } = req.body;
+  try {
+    const userFound = await userService.findUserByUsername(username);
+    if (!userFound) return res.status(404).json({ message: "Usuario no encontrado" });
+    res.json(userFound);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+export const getUserByEmail = async (req, res) =>{
+  const { email } = req.params;
+  try {
+    const userFound = await userService.findUserByEmail(email);
+    if (!userFound) return res.status(404).json({ message: "Usuario no encontrado" });
+    res.json(userFound);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
 export const updateUserById = async (req, res) => {
   const { id } = req.params;
   try {
-    console.log(req.body)
     const updates = req.body;
     const updatedUser = await userService.updateUserDetails(id, updates);
     res.json({ message: "Usuario actualizado con éxito", user: updatedUser });
@@ -117,8 +156,8 @@ export const getUsersByMail = async (req, res) => {
 };
 
 export const addFriend = async (req, res) => {
-  const { username, email } = req.body; // Username o email del amigo
-  const userId = req.user.id; // ID del usuario autenticado
+  const { username, email } = req.body;
+  const userId = req.user.id;
 
   try {
     const friend = username
@@ -126,7 +165,7 @@ export const addFriend = async (req, res) => {
       : await userService.findUserByEmail(email);
 
     if (!friend) {
-      return res.status(404).json({ message: "Amigo no encontrado" });
+      return res.status(404).json({ message: "El usuario no existe" });
     }
 
     if (userId === friend._id.toString()) {
@@ -166,7 +205,6 @@ export const deleteFriend = async (req, res) => {
 export const requestPasswordReset = async (req, res) => {
   try {
     const { email } = req.body;
-    console.log('email: ', req.body.email)
     await userService.requestPasswordReset(email);
 
     res.status(200).json({ message: 'Correo de restablecimiento enviado. Revisa tu bandeja de entrada.' });
@@ -178,8 +216,6 @@ export const requestPasswordReset = async (req, res) => {
 export const resetPassword = async (req, res) => {
   try {
     const { token, newPassword } = req.body;
-    console.log(token)
-    console.log(newPassword)
     await userService.resetPassword(token, newPassword);
 
     res.status(200).json({ message: 'Contraseña restablecida correctamente.' });

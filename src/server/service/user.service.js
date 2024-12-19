@@ -17,8 +17,13 @@ export const getUsers = async (query, page, limit) => {
   }
 };
 
-export const findUserByEmail = async (email) => {
+/*export const findUserByEmail = async (email) => {
   return await User.findOne({ email });
+};*/
+
+export const findUserByEmail = async (email) => {
+  const user = await User.findOne({ email }).lean(); // Retorna un objeto plano con _id como string
+  return user;
 };
 
 export const findUserByUsername = async (username) => {
@@ -95,7 +100,8 @@ export const addFriend = async (userId, friendId) => {
 
 export const getFriends = async (userId) => {
   try {
-    const user = await User.findById(userId).populate("friends", "username email");
+    const user = await User.findById(userId);
+    await user.populate("friends", "username email");
     return user.friends;
   } catch (error) {
     throw new Error(error.message);
@@ -120,14 +126,13 @@ export const deleteFriend = async (userId, friendId) => {
 };
 
 export const requestPasswordReset = async (email) => {
-  console.log(email)
-  const user = await User.findOne({ email }); // Cambié email a { email }
+  const user = await User.findOne({ email });
   if (!user) throw new Error('No se encontró un usuario con ese email');
 
   const resetToken = crypto.randomBytes(32).toString('hex');
 
   user.resetPasswordToken = resetToken;
-  user.resetPasswordExpires = Date.now() + 3600000; // 1 hora
+  user.resetPasswordExpires = Date.now() + 3600000;
 
   await user.save();
 

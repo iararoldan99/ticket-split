@@ -11,21 +11,15 @@ const LoginForm = () => {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
-    const {signIn, isAuthenticated} = useUserInfo();
-
-    useEffect(() => {
-        if (isAuthenticated) {
-            navigate("/dashboard");
-        }
-    }, [isAuthenticated]);
+    const {signInContext, isAuthenticated} = useUserInfo();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const success = await signIn({email, password});
+        const success = await signInContext({email, password});
         if (success) {
             navigate('/dashboard');
         } else {
-            setErrorMessage('Usuario o contraseña incorrectos');
+            setErrorMessage('Email o contraseña incorrectos');
         }
     };
 

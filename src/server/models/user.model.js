@@ -27,6 +27,7 @@ const userSchema = new Schema(
       description: { type: String },
       city: { type: String }
     },
+    projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }],
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     createdAt: { type: Date, default: Date.now },
     resetPasswordToken: { type: String },

@@ -4,7 +4,6 @@ import SidebarNavigation from '../../components/myAccount/SidebarNavigation';
 import UserHeader from '../../components/myAccount/UserHeader';
 import Footer from '../../layout/Footer/Footer';
 import AccountForm from '../../components/myAccount/AccountForm';
-import {useUserInfo} from "../../context/UserContext.js";
 import {useSelector} from "react-redux";
 
 const MyAccount = () => {
@@ -29,7 +28,6 @@ const MyAccount = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Formulario enviado");
     };
 
     return (

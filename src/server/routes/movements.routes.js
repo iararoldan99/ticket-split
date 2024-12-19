@@ -11,6 +11,6 @@ const router = Router();
 router.get("/movements", auth, getMovements);
 router.get("/movements/:id", auth, getMovementById);
 router.post("/movements/add", auth, addMovement);
-router.get("/movements/:projectId", auth, getAllMovementsByProjectId);
+router.get("/movements/project/:projectId", auth, getAllMovementsByProjectId);
 
 export default router;

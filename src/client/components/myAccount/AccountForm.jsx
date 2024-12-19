@@ -20,7 +20,6 @@ const AccountForm = () => {
     setIsEditing(false);
 
     dispatch(updateUser({ username, email }));
-    console.log('Datos guardados:', { username, email });
   };
 
   return (

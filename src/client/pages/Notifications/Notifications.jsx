@@ -5,7 +5,6 @@ import Footer from '../../layout/Footer/Footer';
 import SidebarNavigation from '../../components/myAccount/SidebarNavigation';
 import HeaderIcon from '../../components/myAccount/UserHeader';
 import NotificationsForm from '../../components/notifications/NotificationsForm';
-import {useUserInfo} from "../../context/UserContext.js";
 
 const Notifications = () => {
     const {user} = useSelector((state) => state.user);

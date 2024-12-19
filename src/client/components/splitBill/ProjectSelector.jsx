@@ -3,7 +3,6 @@ import React from 'react';
 const ProjectSelector = ({projects, onSelectProject, onCreateProject}) => {
     const handleSelectChange = (e) => {
         const selectedValue = e.target.value;
-
         if (selectedValue === "new") {
             onCreateProject();
         } else {
@@ -13,7 +12,7 @@ const ProjectSelector = ({projects, onSelectProject, onCreateProject}) => {
 
     return (
         <div className="mb-6">
-            {projects &&
+            {projects ?
                 <>
                     <label className="block text-gray-700 font-medium mb-2">Seleccionar Proyecto</label>
                     <select
@@ -22,18 +21,23 @@ const ProjectSelector = ({projects, onSelectProject, onCreateProject}) => {
                     >
                         <option value="">Selecciona un proyecto</option>
                         {projects.map((project) => (
-                            <option key={project.id} value={project.id}>
+                            <option key={project._id} value={project._id}>
                                 {project.name}
                             </option>
                         ))}
-                        <option value="new">+ Nuevo proyecto</option>
                     </select>
                 </>
-            }
-            <p className="text-center text-gray-500">Todavía no tenés proyectos, ¡empezá creando uno!</p>
+                : <div className="text-center">
+                    <p className="text-gray-700 mb-4">No hay proyectos disponibles.</p>
+                    <button
+                        className="bg-primary text-white py-2 px-4 rounded"
+                        onClick={onCreateProject}
+                    >
+                        Crear proyecto
+                    </button>
+                </div>}
         </div>
-    )
-        ;
+    );
 };
 
 export default ProjectSelector;
